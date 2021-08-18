@@ -10,29 +10,11 @@ import { FooterComponent } from './footer/footer.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { CardsComponent } from './cards/cards.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 
-const routes : Routes = [
-  {
-    path : '',
-    component : CardsComponent
-  },
-  {
-    path : 'user-signup',
-    component : UserRegistrationComponent
-  },
-  {
-    path : 'login',
-    component : LoginComponent
-  },
-  {
-    path : 'contact',
-    component : ContactPageComponent
-  }
-  
-];
+
 
 @NgModule({
   declarations: [
@@ -49,7 +31,7 @@ const routes : Routes = [
     ContactPageComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(routes)
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
