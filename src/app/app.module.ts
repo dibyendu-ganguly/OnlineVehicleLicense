@@ -10,9 +10,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 import { CardsComponent } from './cards/cards.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -31,7 +32,7 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
     ContactPageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
