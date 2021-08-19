@@ -1,8 +1,8 @@
 export class RtoOffice {
 
-    constructor(
-        public rtoId : number,
-        public rtoName : string
-    ){};
+    rtoId : number = 0;
+    rtoName : string = "";
+    
+    constructor(){};
     
 }

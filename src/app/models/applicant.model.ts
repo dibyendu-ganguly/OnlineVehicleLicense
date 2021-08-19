@@ -1,18 +1,19 @@
 import { Gender } from "./gender.enum";
 
 export class Applicant {
-    constructor(
-        public applicantId : string,
-        public firstName : string,
-        public middleName : string,
-        public lastName : string,
-        public dateOfBirth : Date,
-        public placeOfBirth : string,
-        public gender : Gender,
-        public qualification : string,
-        public mobile : string,
-        public nationality : string,
-        public vehicleType : string,
-        public vehicleNumber : string
-    ){};
+
+    applicantId : string = "";
+    firstName : string = "";
+    middleName : string = "";
+    lastName : string = "";
+    dateOfBirth : Date = new Date();
+    placeOfBirth : string = "";
+    gender : Gender = Gender.MALE;
+    qualification : string = "";
+    mobile : string = "";
+    nationality : string = "";
+    vehicleType : string = "";
+    vehicleNumber : string = "";
+
+    constructor(){};
 }

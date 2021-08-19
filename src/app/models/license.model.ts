@@ -2,11 +2,11 @@ import { LicenseType } from "./license-type.enum";
 
 export class License {
 
-    constructor(
-        public licenseNumber : string,
-        public licenseType : LicenseType,
-        public dateOfIssue : Date,
-        public validTill : Date
-    ){};
+    licenseNumber : string = "";
+    licenseType : LicenseType = LicenseType.LL;
+    dateOfIssue : Date = new Date();
+    validTill : Date = new Date();
+    
+    constructor(){};
     
 }
