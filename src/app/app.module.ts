@@ -14,6 +14,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './service/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -32,9 +35,9 @@ import { AppRoutingModule } from './app-routing.module';
     ContactPageComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule
+    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
