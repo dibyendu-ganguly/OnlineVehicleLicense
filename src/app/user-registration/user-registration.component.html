@@ -1,64 +1,121 @@
 <!--Form Starts-->
 <div class="container my-4">
-
-
     <!-- Default form login -->
-    <form class="form-signin border border-light shadow-lg p-4" action="#!">
-
-        <p class="text-center h4 mb-4"><i class="bi bi-person-plus-fill"></i> User Sign Up</p>
+    <form [formGroup]="regForm" class="form-signin border border-light shadow-lg p-4" (ngSubmit)="onSubmit()"
+        novalidate>
+        <p class="text-center h4 mb-4">
+            <i class="bi bi-person-plus-fill"></i> User Sign Up
+        </p>
 
         <!-- Username -->
-        <label for="defaultRegisterFormUserName">Username</label>
-        <input type="text" id="defaultRegisterFormUserName" class="form-control mb-4" placeholder="Enter username..."
-            required>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-4">
+                    <label for="defaultRegisterFormUserName">Username</label>
+                </div>
+                <div class="col">
+                    <div *ngIf="regForm.controls['username'].invalid &&(regForm.controls['username'].dirty || regForm.controls['username'].touched)"
+                        class="text-danger text-right">
+                        <small class="">
+                            <strong *ngIf="username.errors?.pattern">Username format is invalid.</strong>
+                            <strong *ngIf="username.errors?.required">Username is required.</strong>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <input formControlName="username" type="text" id="defaultRegisterFormUserName" class="form-control"
+                placeholder="Enter username..." />
+            <small id="usernameHelpBlock" class="form-text text-muted">
+                Your username must be 6-20 characters long, contain letters and numbers, and must not contain spaces,
+                emoji or
+                special characters other than <mark> . </mark> , <mark> - </mark> , <mark> _ </mark> eg. Dibyendu_12
+            </small>
+        </div>
 
         <!--Email-->
-        <label for="defaultRegisterFormEmail">Username</label>
-        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Enter Email..."
-            required>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-4">
+                    <label for="defaultRegisterFormEmail">Email</label>
+                </div>
+                <div class="col">
+                    <div *ngIf="regForm.controls['email'].invalid &&(regForm.controls['email'].dirty || regForm.controls['email'].touched)"
+                        class="text-danger text-right">
+                        <small>
+                            <strong *ngIf="email.errors?.email">Email format is invalid.</strong>
+                            <strong *ngIf="email.errors?.required">Email is required.</strong>
+                        </small>
+
+                    </div>
+                </div>
+            </div>
+            <input formControlName="email" type="email" id="defaultRegisterFormEmail" class="form-control"
+                placeholder="Enter Email..." />
+        </div>
 
         <!-- Password -->
-        <label for="defaultregisterFormPassword">Password</label>
-        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Password..."
-            required>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-4">
+                    <label for="defaultRegisterFormPassword">Password</label>
+                </div>
+                <div class="col">
+                    <div *ngIf="regForm.controls['password'].invalid && (regForm.controls['password'].dirty || regForm.controls['password'].touched)"
+                        class="text-danger text-right">
+                        <small>
+                            <strong *ngIf="password.errors?.pattern">Password format is invalid.</strong>
+                            <strong *ngIf="password.errors?.required">Password is required.</strong>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group" id="show_hide_regUser_password">
+                <input formControlName="password" type="password" id="defaultRegisterFormPassword" class="form-control"
+                    placeholder="Password..." />
+                <div class="input-group-text">
+                    <a><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+            <small id="passwordHelpBlock" class="form-text text-muted">
+                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
+                emojis or
+                special characters other than <mark> @ </mark>, <mark> # </mark>, <mark> %</mark>, <mark> & </mark>,
+                <mark> + </mark>, <mark> = </mark>.
+            </small>
+        </div>
 
         <!-- Confirm Password -->
-        <label for="defaultregisterFormConfirmPassword">Confirm Password</label>
-        <input type="password" id="defaultRegisterFormConfirmPassword" class="form-control mb-4"
-            placeholder="Confirm Password..." required>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-4">
+                    <label for="defaultRegisterFormConfirmPassword">Confirm Password</label>
+                </div>
+                <div class="col">
+                    <div *ngIf="regForm.controls['confirmPassword'].invalid && (regForm.controls['confirmPassword'].dirty || regForm.controls['confirmPassword'].touched)"
+                        class="text-danger text-right">
+                        <small>
+                            <strong *ngIf="confirmPassword.errors?.pattern">Passwords
+                                do not match</strong>
+                            <strong *ngIf="confirmPassword.errors?.required">Confirm password is required.</strong>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group" id="show_hide_regUser_confirm_password">
+                <input formControlName="confirmPassword" type="password" id="defaultRegisterFormConfirmPassword"
+                    class="form-control" placeholder="Confirm Password..." pattern="{{password.value}}" />
+                <div class="input-group-text">
+                    <a><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                </div>
+            </div>
 
-        <!-- Username -->
-        <!--div class="form-label-group">
-            <input type="text" id="userRegisterFormUserName" class="form-control" placeholder="Enter username..." required autofocus>
-            <label for="userRegisterFormUserName">Username</label>
-        </div-->
-
-        <!-- Email -->
-        <!--div class="form-label-group">
-            <input type="email" id="userRegisterFormEmail" class="form-control" placeholder="Email address..." required autofocus>
-            <label for="userRegisterFormEmail">Email address</label>
-        </div-->
-
-        <!-- Password -->
-        <!--div class="form-label-group">
-            <input type="password" id="userRegisterFormPassword" class="form-control" placeholder="Password..." required>
-            <label for="userRegisterFormPassword">Password</label>
-        </div-->
-
-        <!-- Confirm Password -->
-        <!--div class="form-label-group">
-            <input type="password" id="userRegisterFormConfirmPassword" class="form-control" placeholder="Confirm Password..." required>
-            <label for="userRegisterFormConfirmPassword">Confirm Password</label>
-        </div-->
+        </div>
 
         <!-- Sign Up button -->
-        <button class="btn bg-olive text-white btn-block mt-4 mb-2" type="submit"><i class="bi bi-person-plus-fill"></i>
-            Register</button>
-
-        <!-- Register >
-                    <p>Not a member?
-                        <a href="">Register</a>
-                    </p-->
+        <button class="btn bg-olive text-white btn-block mt-4 mb-2" type="submit" [disabled]="regForm.invalid">
+            <i class="bi bi-person-plus-fill"></i> Register
+        </button>
 
         <!-- Social login >
                     <p>or sign in with:</p>
@@ -68,10 +125,16 @@
                     <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
                     <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
                 -->
+
     </form>
+    <div class="form-signin alert alert-dismissible fade show" [ngClass]="responseStatus  == 500 ?  'alert-danger ' : responseStatus  == 200 ?  'alert-success ' : 'alert-info'" role="alert" *ngIf="regFormSubmitted">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <div *ngIf="responseStatus  == 500;"><strong>Internal Sever Error</strong></div>
+        <div *ngIf="responseStatus  != 500;"><strong>{{responseString}}</strong></div>
+    </div>
     <!-- Default form login -->
-
-
-
 </div>
 <!--Form ends-->
