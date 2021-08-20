@@ -17,9 +17,11 @@ export class UserService {
   }
 
   loginUser(username : string, pass : string):Observable<HttpResponse<String>>{
-    return this.http.get(`${this.baseUrl}`+'/login-user',{
-    params: new HttpParams({fromString : "username="+username+"&pass="+pass}),
-    responseType: 'text', observe: 'response'});
+    let params = new HttpParams()
+    .set('username', username)
+    .set('pass', pass);
+    return this.http.post(`${this.baseUrl}`+'/login-user', params,
+    {responseType: 'text', observe: 'response'});
   }
   
 
