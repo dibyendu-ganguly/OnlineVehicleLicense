@@ -4,16 +4,16 @@ import { LicenseType } from "./license-type.enum";
 
 export class Application {
 
-    constructor(
-        public applicationNumber : string,
-        public applicationDate : Date,
-        public modeOfPayment : string,
-        public amountPaid : number,
-        public paymentStatus : string,
-        public remarks : string,
-        public applicationStatus : ApplicationStatus,
-        public applicationType : LicenseType,
-        public docs : Documents
-    ){};
+    applicationNumber : string = "";
+    applicationDate : Date = new Date();
+    modeOfPayment : string = "";
+    amountPaid : number = 0.00;
+    paymentStatus : string = "";
+    remarks : string = "";
+    applicationStatus : ApplicationStatus = ApplicationStatus.PENDING;
+    applicationType : LicenseType = LicenseType.LL;
+    docs : Documents = new Documents();
+    
+    constructor(){};
     
 }
