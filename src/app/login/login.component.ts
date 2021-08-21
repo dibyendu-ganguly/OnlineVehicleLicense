@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
         this.userLoginFormSubmitted = true;
         this.userLoginForm.reset();
         this.router.navigate(['user']);
-
+        window.location.reload();
       },
       error => {
         console.log(error)
