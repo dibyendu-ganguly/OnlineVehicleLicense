@@ -17,6 +17,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 
 
@@ -32,7 +37,11 @@ import { HttpClientModule } from '@angular/common/http';
     CardsComponent,
     UserRegistrationComponent,
     LoginComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    UserDashboardComponent,
+    HomeComponent,
+    ForbiddenComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

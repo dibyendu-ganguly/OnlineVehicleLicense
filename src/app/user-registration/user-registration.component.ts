@@ -34,6 +34,10 @@ export class UserRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (localStorage.getItem('UserName') != null || sessionStorage.getItem('UserName') != null) {
+      this.router.navigate(['user']);
+    }
+
 
     $("#show_hide_regUser_password a").on('click', function (event) {
       event.preventDefault();
