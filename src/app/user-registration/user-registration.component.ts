@@ -25,8 +25,6 @@ export class UserRegistrationComponent implements OnInit {
   responseStatus?: Number;
 
 
-  resSTR: any;
-  resJSON: any;
 
   constructor(
     private router: Router,
@@ -36,36 +34,40 @@ export class UserRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-      $("#show_hide_regUser_password a").on('click', function(event) {
-          event.preventDefault();
-          if($('#show_hide_regUser_password input').attr("type") == "text"){
-              $('#show_hide_regUser_password input').attr('type', 'password');
-              $('#show_hide_regUser_password i').addClass( "bi bi-eye-slash" );
-              $('#show_hide_regUser_password i').removeClass( "bi bi-eye" );
-          }else if($('#show_hide_regUser_password input').attr("type") == "password"){
-              $('#show_hide_regUser_password input').attr('type', 'text');
-              $('#show_hide_regUser_password i').removeClass( "bi bi-eye-slash" );
-              $('#show_hide_regUser_password i').addClass( "bi bi-eye" );
-          }
-      });
+    if (localStorage.getItem('UserName') != null || sessionStorage.getItem('UserName') != null) {
+      this.router.navigate(['user']);
+    }
 
-    
-   
-      $("#show_hide_regUser_confirm_password a").on('click', function(event) {
-          event.preventDefault();
-          if($('#show_hide_regUser_confirm_password input').attr("type") == "text"){
-              $('#show_hide_regUser_confirm_password input').attr('type', 'password');
-              $('#show_hide_regUser_confirm_password i').addClass( "bi bi-eye-slash" );
-              $('#show_hide_regUser_confirm_password i').removeClass( "bi bi-eye" );
-          }else if($('#show_hide_regUser_confirm_password input').attr("type") == "password"){
-              $('#show_hide_regUser_confirm_password input').attr('type', 'text');
-              $('#show_hide_regUser_confirm_password i').removeClass( "bi bi-eye-slash" );
-              $('#show_hide_regUser_confirm_password i').addClass( "bi bi-eye" );
-          }
-      });
-    
-    
+
+    $("#show_hide_regUser_password a").on('click', function (event) {
+      event.preventDefault();
+      if ($('#show_hide_regUser_password input').attr("type") == "text") {
+        $('#show_hide_regUser_password input').attr('type', 'password');
+        $('#show_hide_regUser_password i').addClass("bi bi-eye-slash");
+        $('#show_hide_regUser_password i').removeClass("bi bi-eye");
+      } else if ($('#show_hide_regUser_password input').attr("type") == "password") {
+        $('#show_hide_regUser_password input').attr('type', 'text');
+        $('#show_hide_regUser_password i').removeClass("bi bi-eye-slash");
+        $('#show_hide_regUser_password i').addClass("bi bi-eye");
+      }
+    });
+
+
+
+    $("#show_hide_regUser_confirm_password a").on('click', function (event) {
+      event.preventDefault();
+      if ($('#show_hide_regUser_confirm_password input').attr("type") == "text") {
+        $('#show_hide_regUser_confirm_password input').attr('type', 'password');
+        $('#show_hide_regUser_confirm_password i').addClass("bi bi-eye-slash");
+        $('#show_hide_regUser_confirm_password i').removeClass("bi bi-eye");
+      } else if ($('#show_hide_regUser_confirm_password input').attr("type") == "password") {
+        $('#show_hide_regUser_confirm_password input').attr('type', 'text');
+        $('#show_hide_regUser_confirm_password i').removeClass("bi bi-eye-slash");
+        $('#show_hide_regUser_confirm_password i').addClass("bi bi-eye");
+      }
+    });
+
+
     this.username = new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z0-9\\._\\-]{6,20}$')]);
     this.email = new FormControl(null, [Validators.required, Validators.email]);
     this.password = new FormControl(null, [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#%&+=])(?=\\S+$).{8,20}$')]);
@@ -95,26 +97,26 @@ export class UserRegistrationComponent implements OnInit {
     console.log("reg called");
     this.userService.registerUser(user).subscribe(
       data => {
-        this.resSTR = JSON.stringify(data);
-        this.resJSON = JSON.parse(this.resSTR);
+        let resSTR = JSON.stringify(data);
+        let resJSON = JSON.parse(resSTR);
         console.log(data)
         console.log(data.body)
         console.log(data.status)
-        console.log(this.resJSON.body)
-        console.log(this.resJSON.status)
-        this.responseString = this.resJSON.body
-        this.responseStatus = this.resJSON.status
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.responseString = resJSON.body
+        this.responseStatus = resJSON.status
 
         console.log(this.responseString)
       },
       error => {
         console.log(error)
-        this.resSTR = error ? JSON.stringify(error) : this.resSTR;
-        this.resJSON = error ? JSON.parse(this.resSTR) : this.resJSON;
-        console.log(this.resJSON.body)
-        console.log(this.resJSON.status)
-        this.responseString = this.resJSON.body
-        this.responseStatus = this.resJSON.status
+        let resSTR = JSON.stringify(error);
+        let resJSON = JSON.parse(resSTR);
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.responseString = resJSON.body
+        this.responseStatus = resJSON.status
       }
     );
 

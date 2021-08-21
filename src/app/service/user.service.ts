@@ -9,19 +9,18 @@ import { Users } from '../models/user.model';
 export class UserService {
 
   private baseUrl = 'http://localhost:6969/ovl/user';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    ) { }
 
   registerUser(user: Users):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+'/register-user',user,{responseType: 'text', observe: 'response'});
   }
 
-  loginUser(username : string, pass : string):Observable<HttpResponse<String>>{
+  loginUser(username: string, pass: string):Observable<HttpResponse<String>>{
     let params = new HttpParams()
     .set('username', username)
     .set('pass', pass);
-    return this.http.post(`${this.baseUrl}`+'/login-user', params,
-    {responseType: 'text', observe: 'response'});
+    return this.http.post(`${this.baseUrl}`+'/login-user',params,{responseType: 'text', observe: 'response'});
   }
   
 

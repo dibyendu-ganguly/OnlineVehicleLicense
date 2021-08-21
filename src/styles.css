@@ -14,8 +14,24 @@ a {
   color: green !important;
   background-color: white;
 }
+#navbarSupportedContent a:hover, #navbarSupportedContent button:hover{
+  color: green !important;
+  background-color: white; 
+}
 .bg-olive {
   background-color: olive;
+}
+.bg-mustard {
+  background-color: #edd989;
+}
+.bg-mustard-light {
+  background-color: #c6baa4;
+}
+.bg-coffee-light{
+  background-color: #957465;
+}
+.bg-coffee-dark{
+  background-color: #453b37;
 }
 .bg-olive-lighter {
   background-color: #d6eeac;
@@ -113,4 +129,13 @@ table th {
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+
+input.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched{
+  border: 1px solid green;
 }

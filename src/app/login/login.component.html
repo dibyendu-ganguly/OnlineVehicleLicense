@@ -1,93 +1,117 @@
-    <!--Tab Pane starts-->
-    <div class="container">
-        <ul class="pills-tab nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="pills-user-sign-in-tab" data-toggle="pill" href="#pills-user-sign-in" role="tab" aria-controls="pills-user-sign-in" aria-selected="true">User Sign In</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-rto-officer-sign-in-tab" data-toggle="pill" href="#pills-rto-officer-sign-in" role="tab" aria-controls="pills-rto-officer-sign-in" aria-selected="false">RTO Officer Sign In</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="pills-admin-sign-in-tab" data-toggle="pill" href="#pills-admin-sign-in" role="tab" aria-controls="pills-admin-sign-in" aria-selected="false">Admin Sign in</a>
-            </li>
-        </ul>
-    </div>  
-      <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-user-sign-in" role="tabpanel" aria-labelledby="pills-user-sign-in-tab">
-            <!--Form Starts-->
-            <div class="container my-4">
-                        <!-- Default form login -->
-                        <form [formGroup]="loginForm" 
-                        class="form-signin border border-light shadow-lg p-4" 
-                        action="#!" (ngSubmit)="onSubmit()" novalidate>
+<!--Tab Pane starts-->
+<div class="container">
+    <ul class="pills-tab nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="pills-user-sign-in-tab" data-toggle="pill" href="#pills-user-sign-in"
+                role="tab" aria-controls="pills-user-sign-in" aria-selected="true">User Sign In</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-rto-officer-sign-in-tab" data-toggle="pill" href="#pills-rto-officer-sign-in"
+                role="tab" aria-controls="pills-rto-officer-sign-in" aria-selected="false">RTO Officer Sign In</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-admin-sign-in-tab" data-toggle="pill" href="#pills-admin-sign-in" role="tab"
+                aria-controls="pills-admin-sign-in" aria-selected="false">Admin Sign in</a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content" id="pills-tabContent">
+    <div [formGroup]="userLoginForm" class="tab-pane fade show active" id="pills-user-sign-in" role="tabpanel"
+        aria-labelledby="pills-user-sign-in-tab"
+        (ngSubmit)="userLogin(userLoginForm.controls['username'].value , userLoginForm.controls['password'].value , userLoginForm.controls['rememberMe'].value)">
+        <!--Form Starts-->
+        <div class="container my-4">
+            <!-- Default form login -->
+            <form class="form-signin border border-light shadow-lg p-4" action="#!">
 
-                            <p class="text-center h4 mb-4">User Sign In</p>
+                <p class="text-center h4 mb-4">User Sign In</p>
 
-                            <!-- Username -->
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <label for="defaultUserLoginFormUserName">Username</label>
-                                    </div>
-                                    <div class="col">
-                                        <div *ngIf="loginForm.controls['username'].invalid &&(loginForm.controls['username'].dirty || loginForm.controls['username'].touched)"
-                                            class="text-danger text-right">
-                                            <small class="">
-                                                <strong *ngIf="username.errors?.pattern">Username format is invalid.</strong>
-                                                <strong *ngIf="username.errors?.required">Username is required.</strong>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input formControlName="username" type="text" 
-                                id="defaultUserLoginFormUserName" class="form-control mb-4" 
-                                placeholder="Enter username...">
+                <!-- Username -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="defaultUserLoginFormUserName">Username</label>
+                        </div>
+                        <div class="col">
+                            <div *ngIf="userLoginForm.controls['username'].invalid &&(userLoginForm.controls['username'].dirty || userLoginForm.controls['username'].touched)"
+                                class="text-danger text-right">
+                                <small class="">
+                                    <strong *ngIf="userUsername.errors?.required">Username is required.</strong>
+                                </small>
                             </div>
-
-                            <!-- Password -->
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <label for="defaultUserLoginFormPassword">Password</label>
-                                    </div>
-                                    <div class="col">
-                                        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
-                                            class="text-danger text-right">
-                                            <small>
-                                                <strong *ngIf="password.errors?.pattern">Password format is invalid.</strong>
-                                                <strong *ngIf="password.errors?.required">Password is required.</strong>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input formControlName="password" type="password" id="defaultUserLoginFormPassword" 
-                                class="form-control mb-4" placeholder="Password...">
+                            <div *ngIf="userLoginForm.controls['username'].valid &&(userLoginForm.controls['username'].dirty || userLoginForm.controls['username'].touched)"
+                                class="text-success text-right">
+                                <small>
+                                    <strong><i class="bi bi-check-lg"></i></strong>
+                                </small>
                             </div>
+                        </div>
+                    </div>
+                    <input formControlName="username" type="text" id="defaultUserLoginFormUserName" class="form-control"
+                        placeholder="Enter username...">
+                </div>
 
-                            <div class="d-flex justify-content-around">
-                                <div>
-                                    <!-- Remember me -->
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="defaultUSerLoginFormRemember">
-                                        <label class="custom-control-label" for="defaultUserLoginFormRemember">Remember me</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <!-- Forgot password -->
-                                    <a href="">Forgot password?</a>
-                                </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="defaultUserLoginFormPassword">Password</label>
+                        </div>
+                        <div class="col">
+                            <div *ngIf="userLoginForm.controls['password'].invalid &&(userLoginForm.controls['password'].dirty || userLoginForm.controls['password'].touched)"
+                                class="text-danger text-right">
+                                <small class="">
+                                    <strong *ngIf="userPassword.errors?.required">Password is required.</strong>
+                                </small>
                             </div>
+                            <div *ngIf="userLoginForm.controls['password'].valid &&(userLoginForm.controls['password'].dirty || userLoginForm.controls['password'].touched)"
+                                class="text-success text-right">
+                                <small>
+                                    <strong><i class="bi bi-check-lg"></i></strong>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group" id="show_hide_loginUser_password">
+                        <input formControlName="password" type="password" id="defaultUserLoginFormPassword"
+                            class="form-control" placeholder="Password...">
+                        <div class="input-group-text">
+                            <a><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
 
-                            <!-- Sign in button -->
-                            <button class="btn bg-olive text-white btn-block my-4" 
-                            type="submit" [disabled]="loginForm.invalid"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                </div>
 
-                            <!-- Register -->
-                            <p class="text-center">Not a member?
-                                <a routerLink="/user-signup" >Register here</a>
-                            </p>
 
-                            <!-- Social login >
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <div class="form-check">
+                            <input formControlName="rememberMe" mdbCheckbox class="form-check-input" type="checkbox"
+                                id="defaultUSerLoginFormRemember" />
+                            <label class="form-check-label" for="defaultUSerLoginFormRemember">
+                                Remember Me
+                            </label>
+                        </div>
+                        <!-- Default checkbox -->
+
+                    </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+
+                <!-- Sign in button -->
+                <button class="btn bg-olive text-white btn-block my-4" type="submit"
+                    [disabled]="userLoginForm.invalid"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+
+                <!-- Register -->
+                <p class="text-center">Not a member?
+                    <a routerLink="/user-signup">Register here</a>
+                </p>
+
+                <!-- Social login >
                             <p>or sign in with:</p>
 
                             <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
@@ -95,56 +119,69 @@
                             <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
                             <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
                         -->
-                            <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
-                            <div class="alert alert-success" *ngIf='isLoggedIn'>{{successMessage}}</div>
-                        </form>
-                        <!-- Default form login -->
-
-
+            </form>
+            <!-- Default form login -->
+            <div class="form-signin alert alert-dismissible fade show"
+                [ngClass]="userResponseStatus  == 500 ?  'alert-danger ' : userResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                role="alert" *ngIf="userLoginFormSubmitted">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <div *ngIf="userResponseStatus  == 500;"><strong>Internal Sever Error</strong></div>
+                <div *ngIf="userResponseStatus  != 500;"><strong>{{userResponseString}}</strong></div>
             </div>
-            <!--Form ends-->
+
+
+
         </div>
-        <div class="tab-pane fade" id="pills-rto-officer-sign-in" role="tabpanel" aria-labelledby="pills-rto-officer-sign-in-tab">
-            <!--Form Starts-->
-            <div class="container my-4">
+        <!--Form ends-->
+    </div>
+    <div class="tab-pane fade" id="pills-rto-officer-sign-in" role="tabpanel"
+        aria-labelledby="pills-rto-officer-sign-in-tab">
+        <!--Form Starts-->
+        <div class="container my-4">
 
 
-                        <!-- Default form login -->
-                        <form class="form-signin border border-light shadow-lg p-4" action="#!">
+            <!-- Default form login -->
+            <form class="form-signin border border-light shadow-lg p-4" action="#!">
 
-                            <p class="text-center h4 mb-4">RTO Officer Sign In</p>
+                <p class="text-center h4 mb-4">RTO Officer Sign In</p>
 
-                            <!-- Username -->
-                            <label for="defaultRTOLoginFormUserName">Username</label>
-                            <input type="text" id="defaultRTOLoginFormUserName" class="form-control mb-4" placeholder="Enter username...">
+                <!-- Username -->
+                <label for="defaultRTOLoginFormUserName">Username</label>
+                <input type="text" id="defaultRTOLoginFormUserName" class="form-control mb-4"
+                    placeholder="Enter username...">
 
-                            <!-- Password -->
-                            <label for="defaultRTOLoginFormPassword">Password</label>
-                            <input type="password" id="defaultRTOLoginFormPassword" class="form-control mb-4" placeholder="Password...">
+                <!-- Password -->
+                <label for="defaultRTOLoginFormPassword">Password</label>
+                <input type="password" id="defaultRTOLoginFormPassword" class="form-control mb-4"
+                    placeholder="Password...">
 
-                            <div class="d-flex justify-content-around">
-                                <div>
-                                    <!-- Remember me -->
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="defaultRTOLoginFormRemember">
-                                        <label class="custom-control-label" for="defaultRTOLoginFormRemember">Remember me</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <!-- Forgot password -->
-                                    <a href="">Forgot password?</a>
-                                </div>
-                            </div>
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultRTOLoginFormRemember">
+                            <label class="custom-control-label" for="defaultRTOLoginFormRemember">Remember me</label>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
 
-                            <!-- Sign in button -->
-                            <button class="btn bg-olive text-white btn-block my-4" type="submit"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                <!-- Sign in button -->
+                <button class="btn bg-olive text-white btn-block my-4" type="submit"><i
+                        class="bi bi-box-arrow-in-right"></i> Login</button>
 
-                            <!-- Register >
+                <!-- Register >
                             <p>Not a member?
                                 <a href="">Register</a>
                             </p-->
 
-                            <!-- Social login >
+                <!-- Social login >
                             <p>or sign in with:</p>
 
                             <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
@@ -152,56 +189,59 @@
                             <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
                             <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
                         -->
-                        </form>
-                        <!-- Default form login -->
+            </form>
+            <!-- Default form login -->
 
 
 
-            </div>
-            <!--Form ends-->
         </div>
-        <div class="tab-pane fade" id="pills-admin-sign-in" role="tabpanel" aria-labelledby="pills-admin-sign-in-tab">
-            <!--Form Starts-->
-            <div class="container my-4">
+        <!--Form ends-->
+    </div>
+    <div class="tab-pane fade" id="pills-admin-sign-in" role="tabpanel" aria-labelledby="pills-admin-sign-in-tab">
+        <!--Form Starts-->
+        <div class="container my-4">
 
 
 
-                        <!-- Default form login -->
-                        <form class="form-signin border border-light shadow-lg p-4" action="#!">
+            <!-- Default form login -->
+            <form class="form-signin border border-light shadow-lg p-4" action="#!">
 
-                            <p class="text-center h4 mb-4">Admin Sign In</p>
+                <p class="text-center h4 mb-4">Admin Sign In</p>
 
-                            <!-- Username -->
-                            <label for="defaultAdminLoginFormUserName">Username</label>
-                            <input type="text" id="defaultAdminLoginFormUserName" class="form-control mb-4" placeholder="Enter username...">
+                <!-- Username -->
+                <label for="defaultAdminLoginFormUserName">Username</label>
+                <input type="text" id="defaultAdminLoginFormUserName" class="form-control mb-4"
+                    placeholder="Enter username...">
 
-                            <!-- Password -->
-                            <label for="defaultAdminLoginFormPassword">Password</label>
-                            <input type="password" id="defaultAdminLoginFormPassword" class="form-control mb-4" placeholder="Password...">
+                <!-- Password -->
+                <label for="defaultAdminLoginFormPassword">Password</label>
+                <input type="password" id="defaultAdminLoginFormPassword" class="form-control mb-4"
+                    placeholder="Password...">
 
-                            <div class="d-flex justify-content-around">
-                                <div>
-                                    <!-- Remember me -->
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="defaultAdminLoginFormRemember">
-                                        <label class="custom-control-label" for="defaultAdminLoginFormRemember">Remember me</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <!-- Forgot password -->
-                                    <a href="">Forgot password?</a>
-                                </div>
-                            </div>
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultAdminLoginFormRemember">
+                            <label class="custom-control-label" for="defaultAdminLoginFormRemember">Remember me</label>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
 
-                            <!-- Sign in button -->
-                            <button class="btn bg-olive text-white btn-block my-4" type="submit"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                <!-- Sign in button -->
+                <button class="btn bg-olive text-white btn-block my-4" type="submit"><i
+                        class="bi bi-box-arrow-in-right"></i> Login</button>
 
-                            <!-- Register >
+                <!-- Register >
                             <p>Not a member?
                                 <a href="">Register</a>
                             </p-->
 
-                            <!-- Social login >
+                <!-- Social login >
                             <p>or sign in with:</p>
 
                             <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
@@ -209,13 +249,13 @@
                             <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
                             <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
                         -->
-                        </form>
-                        <!-- Default form login -->
+            </form>
+            <!-- Default form login -->
 
 
 
-            </div>
-            <!--Form ends-->
         </div>
-      </div>
-      <!--Tab pane ends-->
+        <!--Form ends-->
+    </div>
+</div>
+<!--Tab pane ends-->
