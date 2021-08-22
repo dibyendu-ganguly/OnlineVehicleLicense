@@ -16,13 +16,12 @@
     </ul>
 </div>
 <div class="tab-content" id="pills-tabContent">
-    <div [formGroup]="userLoginForm" class="tab-pane fade show active" id="pills-user-sign-in" role="tabpanel"
-        aria-labelledby="pills-user-sign-in-tab"
-        (ngSubmit)="userLogin(userLoginForm.controls['username'].value , userLoginForm.controls['password'].value , userLoginForm.controls['rememberMe'].value)">
+    <div  class="tab-pane fade show active" id="pills-user-sign-in" role="tabpanel"
+        aria-labelledby="pills-user-sign-in-tab">
         <!--Form Starts-->
         <div class="container my-4">
             <!-- Default form login -->
-            <form class="form-signin border border-light shadow-lg p-4" action="#!">
+            <form [formGroup]="userLoginForm" class="form-signin border border-light shadow-lg p-4" (ngSubmit)="userLogin(userLoginForm.controls['username'].value , userLoginForm.controls['password'].value , userLoginForm.controls['rememberMe'].value)">
 
                 <p class="text-center h4 mb-4">User Sign In</p>
 
@@ -35,7 +34,7 @@
                         <div class="col">
                             <div *ngIf="userLoginForm.controls['username'].invalid &&(userLoginForm.controls['username'].dirty || userLoginForm.controls['username'].touched)"
                                 class="text-danger text-right">
-                                <small class="">
+                                <small>
                                     <strong *ngIf="userUsername.errors?.required">Username is required.</strong>
                                 </small>
                             </div>

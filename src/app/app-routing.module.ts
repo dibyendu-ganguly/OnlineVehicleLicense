@@ -9,6 +9,9 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ApplicationComponent } from './application/application.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes : Routes = [
   {
@@ -18,6 +21,18 @@ const routes : Routes = [
   {
     path : 'home',
     component : HomeComponent
+  },
+  {
+    path : 'about-us',
+    component : AboutUsComponent
+  },
+  {
+    path : 'user-profile',
+    component : ProfileComponent
+  },
+  {
+    path : 'user-application',
+    component : ApplicationComponent
   },
   {
     path : 'user-signup',
