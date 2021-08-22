@@ -2,7 +2,7 @@ import { Gender } from "./gender.enum";
 
 export class Applicant {
 
-    applicantId : string = "";
+    //applicantId : string = "";
     firstName : string = "";
     middleName : string = "";
     lastName : string = "";

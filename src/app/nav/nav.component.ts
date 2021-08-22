@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
   ) {  }
 
   isLoggedIn: boolean = false;
-  userName?: String;
+  userName?: string;
 
   ngOnInit(): void {
     
@@ -43,7 +43,8 @@ export class NavComponent implements OnInit {
       localStorage.removeItem('token');
       //this.isLoggedIn = false;
     }
-    window.location.reload();
+    //window.location.reload();
+    this.router.navigate(['']);
   }
 
 }

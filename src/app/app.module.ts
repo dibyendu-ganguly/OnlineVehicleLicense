@@ -21,6 +21,10 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { HomeComponent } from './home/home.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ApplicationComponent } from './application/application.component';
+import { UserDashboardNavbarComponent } from './user-dashboard-navbar/user-dashboard-navbar.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 
@@ -41,7 +45,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     UserDashboardComponent,
     HomeComponent,
     ForbiddenComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProfileComponent,
+    ApplicationComponent,
+    UserDashboardNavbarComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

@@ -126,16 +126,19 @@ table th {
   cursor: pointer;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
-}
+
 input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched{
+textarea.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched
+{
   border: 1px solid red;
 }
 
 input.ng-valid.ng-touched,
-textarea.ng-valid.ng-touched{
+textarea.ng-valid.ng-touched,
+select.ng-valid.ng-touched{
   border: 1px solid green;
+}
+#page-content-wrapper{
+  min-height: 100vh;
 }
