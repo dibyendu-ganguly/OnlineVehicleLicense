@@ -203,25 +203,25 @@
 
 
             <!-- Default form login -->
-            <form class="form-signin border border-light shadow-lg p-4" action="#!">
+            <form [formGroup]="adminLoginForm" class="form-signin border border-light shadow-lg p-4" (ngSubmit)="adminLogin(adminLoginForm.controls['adminUsername'].value , adminLoginForm.controls['adminPassword'].value , adminLoginForm.controls['adminRememberMe'].value)">
 
                 <p class="text-center h4 mb-4">Admin Sign In</p>
 
                 <!-- Username -->
                 <label for="defaultAdminLoginFormUserName">Username</label>
-                <input type="text" id="defaultAdminLoginFormUserName" class="form-control mb-4"
+                <input formControlName="adminUsername" type="text" id="defaultAdminLoginFormUserName" class="form-control mb-4"
                     placeholder="Enter username...">
 
                 <!-- Password -->
                 <label for="defaultAdminLoginFormPassword">Password</label>
-                <input type="password" id="defaultAdminLoginFormPassword" class="form-control mb-4"
+                <input formControlName="adminPassword" type="password" id="defaultAdminLoginFormPassword" class="form-control mb-4"
                     placeholder="Password...">
 
                 <div class="d-flex justify-content-around">
                     <div>
                         <!-- Remember me -->
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultAdminLoginFormRemember">
+                            <input formControlName="adminRememberMe" type="checkbox" class="custom-control-input" id="defaultAdminLoginFormRemember">
                             <label class="custom-control-label" for="defaultAdminLoginFormRemember">Remember me</label>
                         </div>
                     </div>
