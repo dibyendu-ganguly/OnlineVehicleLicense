@@ -12,6 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ApplicationComponent } from './application/application.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AddressComponent } from './address/address.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 const routes : Routes = [
   {
@@ -33,6 +36,18 @@ const routes : Routes = [
   {
     path : 'user-application',
     component : ApplicationComponent
+  },
+  {
+    path : 'user-address',
+    component : AddressComponent
+  },
+  {
+    path : 'user-appointment',
+    component : AppointmentComponent
+  },
+  {
+    path : 'user-documents',
+    component : DocumentsComponent
   },
   {
     path : 'user-signup',

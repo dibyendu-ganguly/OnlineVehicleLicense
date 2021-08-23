@@ -27,6 +27,10 @@ export class UserService {
   addApplicantProfile(username:string, applicant: Applicant):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/${username}/add-applicant-profile`,applicant,{responseType: 'text', observe: 'response'});
   }
+
+  viewApplicantProfile(username:string):Observable<any>{
+    return this.http.get(`${this.baseUrl}`+`/${username}/view-applicant-profile`);
+  }
   
 
 }

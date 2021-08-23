@@ -1,6 +1,5 @@
 export class Address {
 
-    addrId : string = "";
     house : string = "";
     city : string = "";
     state : string = "";

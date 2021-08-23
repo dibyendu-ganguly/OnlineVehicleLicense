@@ -1,9 +1,8 @@
 export class Documents {
 
-    id : string = "";
-    photo : string = "";
-    idProof : string = "";
-    addressProof : string = "";
+    photo ?: File ;
+    idProof ?: File;
+    addressProof ?: File;
     
     constructor(){};
     

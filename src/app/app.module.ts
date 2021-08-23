@@ -25,6 +25,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ApplicationComponent } from './application/application.component';
 import { UserDashboardNavbarComponent } from './user-dashboard-navbar/user-dashboard-navbar.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AddressComponent } from './address/address.component';
+import { DocumentsComponent } from './documents/documents.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 
 
@@ -49,7 +52,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ProfileComponent,
     ApplicationComponent,
     UserDashboardNavbarComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AddressComponent,
+    DocumentsComponent,
+    AppointmentComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
