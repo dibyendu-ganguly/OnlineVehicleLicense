@@ -1,8 +1,7 @@
-
 <!-- <div class="d-flex" id="wrapper"> -->
 
-    <!-- Sidebar -->
-    <!--div class="border-right bg-light" id="sidebar-wrapper">
+<!-- Sidebar -->
+<!--div class="border-right bg-light" id="sidebar-wrapper">
         <div class="sidebar-heading"><button class="btn bg-light" id="close-sidebar">Close <i class="bi bi-x-lg"></i></button></div>
         <div class="list-group list-group-flush">
             <a routerLink="/user"  class="list-group-item list-group-item-action bg-light">Dashboard</a>
@@ -13,40 +12,199 @@
             <a routerLink="/user" class="list-group-item list-group-item-action bg-light">Status</a>       
         </div>
     </div-->
-    <!-- /#sidebar-wrapper -->
+<!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
+<!-- Page Content -->
+<div id="page-content-wrapper">
 
-        <app-user-dashboard-navbar></app-user-dashboard-navbar>
+    <app-user-dashboard-navbar></app-user-dashboard-navbar>
 
-        <div class="container-fluid">
-            <h1 class="mt-4">Dashboard</h1>
-            <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
-                larger screens. When toggled using the button below, the menu will change.</p>
-            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is
-                optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which
-                will toggle the menu when clicked.</p>
-        </div>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
+            larger screens. When toggled using the button below, the menu will change.</p>
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is
+            optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which
+            will toggle the menu when clicked.</p>
+    </div>
 
-        <div class="container-fluid mb-4">
+    <div class="container-fluid  mb-4">
+        <div class="accordion" id="accordionExample">
             <div class="card">
-                <h4 class="card-header">Requirements</h4>
-                <div class="card-body">
-                    <ul>
-                        <li>JQuery</li>
-                        <li>Bootstrap 4 beta-3</li>
-                    </ul>
+                <h4 class="card-header bg-olive-dark text-white" id="headingOne">
+                    <div class="row">
+                        <div class="col">Profile</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="datatable table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Middle Name</th>
+                                        <th scope="col">Last Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{this.applicant.firstName}}</td>
+                                        <td>{{this.applicant.middleName}}</td>
+                                        <td>{{this.applicant.lastName}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Date of Birth</th>
+                                        <th>Place of Birth</th>
+                                        <th>Gender</th>
+                                        <th>Qualification</th>
+                                        <th>Mobile</th>
+                                        <th>Nationality</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{this.applicant.dateOfBirth}}</td>
+                                        <td>{{this.applicant.placeOfBirth}}
+                                        </td>
+                                        <td>{{this.applicant.gender}}</td>
+                                        <td>{{this.applicant.qualification}}</td>
+                                        <td>{{this.applicant.mobile}}</td>
+                                        <td>
+                                            <div class="badge badge-success">{{this.applicant.nationality}}
+                                            </div>
+                                        </td>
+                                        <td>{{this.applicant.vehicleNumber}}</td>
+                                        <td>{{this.applicant.vehicleType}}</td>
+                                        <td>
+                                            <button class="btn btn-blue btn-icon" routerLink="/user-profile"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                              </svg></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="card-header bg-olive-light text-white" id="headingTwo">
+                    <div class="row">
+                        <div class="col">Address</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
+                        of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="card-header bg-olive-dark text-white" id="headingThree">
+                    <div class="row">
+                        <div class="col">Application</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
+                        of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="card-header bg-olive-light text-white" id="headingFour">
+                    <div class="row">
+                        <div class="col">Appointment</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
+                        of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h4 class="card-header bg-olive-dark text-white" id="headingFive">
+                    <div class="row">
+                        <div class="col">License</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
+                        of them accusamus labore sustainable VHS.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#page-content-wrapper -->
 
 <!-- </div> -->
 <!-- /#wrapper -->
-
-
-
-
 

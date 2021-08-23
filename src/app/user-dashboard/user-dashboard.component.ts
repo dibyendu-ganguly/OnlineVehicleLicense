@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Applicant } from '../models/applicant.model';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -9,10 +11,18 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private userService : UserService
   ) { }
 
   val = localStorage.getItem('UserName');
+
+  applicant : Applicant = new Applicant();
+
+  isApplicantPresent = false;
+
+  isLoggedIn: boolean = false;
+  userName?: string;
 
   ngOnInit(): void {
 
@@ -31,6 +41,32 @@ export class UserDashboardComponent implements OnInit {
     //   $("#page-content-wrapper").css("opacity","1");
     //   $("#page-content-wrapper").css("z-index","0");
     // });
+
+    if (localStorage.getItem('UserName') != null || sessionStorage.getItem('UserName') != null) {
+      this.isLoggedIn = true;
+      if (localStorage.getItem('UserName')?.toString() != null) {
+        this.userName = localStorage.getItem('UserName')?.toString();
+      }
+      else if (sessionStorage.getItem('UserName')?.toString() != null) {
+        this.userName = sessionStorage.getItem('UserName')?.toString();
+      }
+    }
+
+
+    this.userService.viewApplicantProfile(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicant = data;
+        console.log(this.applicant.firstName);
+        console.log(this.applicant);
+        if(this.applicant!=null){
+          this.isApplicantPresent = true;
+        } else{
+          this.isApplicantPresent = false;
+        }
+        
+      }
+    );
 
     
 

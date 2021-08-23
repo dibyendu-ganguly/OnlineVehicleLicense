@@ -72,7 +72,6 @@ export class ProfileComponent implements OnInit {
   userName!: string;
 
   applicant : Applicant = new Applicant();
-  a !: Applicant;
 
   isPresent = false;
   ngOnInit(): void {
@@ -92,7 +91,6 @@ export class ProfileComponent implements OnInit {
     }
 
     
-    this.a = new Applicant();
 
     this.userService.viewApplicantProfile(this.userName).subscribe(
       data => {
