@@ -28,6 +28,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { AddressComponent } from './address/address.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { DatePipe } from '@angular/common';
+import { RtoOfficeComponent } from './rto-office/rto-office.component';
+import { RtoOfficerComponent } from './rto-officer/rto-officer.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -55,12 +59,15 @@ import { AppointmentComponent } from './appointment/appointment.component';
     AboutUsComponent,
     AddressComponent,
     DocumentsComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    RtoOfficeComponent,
+    RtoOfficerComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

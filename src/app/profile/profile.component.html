@@ -16,7 +16,7 @@
         <div class="card">
             <h4 class="card-header">Profile</h4>
             <div class="card-body">
-                <form [formGroup]="applicantForm" (ngSubmit)="addApplicant()">
+                <form [formGroup]="applicantForm">
                     <div class="form-row">
                         <!--First Name-->
                         <div class="form-group col-md">
@@ -304,22 +304,27 @@
                     </div>
                     <div class="row">
                         <div class="col-3">
-                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2"
-                                [disabled]="applicantForm.invalid">Save</button>
+                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="!isPresent"
+                                [disabled]="applicantForm.invalid" (click)="addApplicant()">Save</button>
+                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="isPresent"
+                                [disabled]="applicantForm.invalid" (click)="updateApplicant()">Update</button>
                             <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
                             <button routerLink="/user-address" class="btn bg-olive text-white mb-2 mr-2">Next</button>
                         </div>
-                        
+
                         <div class="col">
                             <div class="form-signin alert alert-dismissible fade show"
                                 [ngClass]="applicantResponseStatus  == 500 ?  'alert-danger ' : applicantResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
                                 role="alert" *ngIf="applicantFormSubmitted">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="applicantFormSubmitted=false">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                                    (click)="applicantFormSubmitted=false;">
                                     <span aria-hidden="true">&times;</span>
                                     <span class="sr-only">Close</span>
                                 </button>
-                                <div *ngIf="applicantResponseStatus  == 500;"><strong>Internal Sever Error</strong></div>
-                                <div *ngIf="applicantResponseStatus  != 500;"><strong>{{applicantFormResponseString}}</strong></div>
+                                <div *ngIf="applicantResponseStatus  == 500;"><strong>Internal Sever Error</strong>
+                                </div>
+                                <div *ngIf="applicantResponseStatus  != 500;">
+                                    <strong>{{applicantFormResponseString}}</strong></div>
                             </div>
                         </div>
                     </div>

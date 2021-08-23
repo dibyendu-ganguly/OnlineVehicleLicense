@@ -1,6 +1,8 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { Applicant } from '../models/applicant.model';
 import { Gender } from '../models/gender.enum';
 import { UserService } from '../service/user.service';
@@ -62,14 +64,20 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private userService : UserService
+    private userService : UserService,
+    public datePipe : DatePipe
   ) { }
 
   isLoggedIn: boolean = false;
   userName!: string;
 
+  applicant : Applicant = new Applicant();
+  a !: Applicant;
+
+  isPresent = false;
   ngOnInit(): void {
 
+    
 
     if (localStorage.getItem('UserName') == null && sessionStorage.getItem('UserName') == null) {
       this.router.navigate(['forbidden']);
@@ -82,6 +90,24 @@ export class ProfileComponent implements OnInit {
         this.userName = sessionStorage.getItem('UserName')!.toString();
       }
     }
+
+    
+    this.a = new Applicant();
+
+    this.userService.viewApplicantProfile(this.userName).subscribe(
+      data => {
+        console.log(data);
+        this.applicant = data;
+        console.log(this.applicant);
+        if(this.applicant!=null){
+          this.isPresent = true;
+        } else{
+          this.isPresent = false;
+        }
+        
+      }
+    );
+
 
     this.firstName = new FormControl(null, [Validators.required]);
     this.middleName = new FormControl(null);
@@ -113,6 +139,25 @@ export class ProfileComponent implements OnInit {
   
 
   newApplicantProfile : Applicant = new Applicant();
+
+  // getApplicant(){
+  //   let currentApplicant = new Applicant();
+  //   this.userService.viewApplicantProfile(this.userName).subscribe(
+  //     (data) => {
+  //       currentApplicant = data;
+  //       this.newApplicantProfile = currentApplicant;
+  //       console.log("curr ",currentApplicant);
+  //       console.log("data",data);
+  //       this.applicant = data;
+  //       console.log("applicant from data",this.newApplicantProfile);
+  //     }
+  //   );
+  // }
+
+  // getNewApp(){
+  //   console.log(this.newApplicantProfile);
+  // }
+
   addApplicant(){
     console.log("onsubmit profile called");
     console.log(this.applicantForm);
@@ -120,7 +165,7 @@ export class ProfileComponent implements OnInit {
     this.newApplicantProfile.firstName = this.applicantForm.controls['firstName'].value;
     this.newApplicantProfile.middleName = this.applicantForm.controls['middleName'].value;
     this.newApplicantProfile.lastName = this.applicantForm.controls['lastName'].value;
-    this.newApplicantProfile.dateOfBirth = this.applicantForm.controls['dateOfBirth'].value;
+    this.newApplicantProfile.dateOfBirth = this.datePipe.transform(this.applicantForm.controls['dateOfBirth'].value, 'dd-MM-yyyy')!;
     this.newApplicantProfile.placeOfBirth = this.applicantForm.controls['placeOfBirth'].value;
     this.newApplicantProfile.gender = this.applicantForm.controls['gender'].value;
     this.newApplicantProfile.qualification = this.applicantForm.controls['qualification'].value;
@@ -143,6 +188,54 @@ export class ProfileComponent implements OnInit {
         this.applicantResponseStatus = resJSON.status
 
         console.log(this.applicantFormResponseString)
+        window.location.reload();
+      },
+      error => {
+        console.log(error)
+        let resSTR = JSON.stringify(error);
+        let resJSON = JSON.parse(resSTR);
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.applicantFormResponseString = resJSON.body
+        this.applicantResponseStatus = resJSON.status
+      }
+    );
+
+    this.applicantFormSubmitted = true;
+    //this.applicantForm.reset();
+  }
+
+  updateApplicant(){
+    console.log("onsubmit profile called");
+    console.log(this.applicantForm);
+    this.applicantFormSubmitted = true;
+    this.newApplicantProfile.firstName = this.applicantForm.controls['firstName'].value;
+    this.newApplicantProfile.middleName = this.applicantForm.controls['middleName'].value;
+    this.newApplicantProfile.lastName = this.applicantForm.controls['lastName'].value;
+    this.newApplicantProfile.dateOfBirth = this.datePipe.transform(this.applicantForm.controls['dateOfBirth'].value, 'dd-MM-yyyy')!;
+    this.newApplicantProfile.placeOfBirth = this.applicantForm.controls['placeOfBirth'].value;
+    this.newApplicantProfile.gender = this.applicantForm.controls['gender'].value;
+    this.newApplicantProfile.qualification = this.applicantForm.controls['qualification'].value;
+    this.newApplicantProfile.mobile = this.applicantForm.controls['mobile'].value;
+    this.newApplicantProfile.nationality = this.applicantForm.controls['nationality'].value;
+    this.newApplicantProfile.vehicleType = this.applicantForm.controls['vehicleType'].value;
+    this.newApplicantProfile.vehicleNumber = this.applicantForm.controls['vehicleNumber'].value;
+
+
+    this.userService.updateApplicantProfile(this.userName,this.newApplicantProfile).subscribe(
+      data => {
+        let resSTR = JSON.stringify(data);
+        let resJSON = JSON.parse(resSTR);
+        console.log(data)
+        console.log(data.body)
+        console.log(data.status)
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.applicantFormResponseString = resJSON.body
+        this.applicantResponseStatus = resJSON.status
+
+        console.log(this.applicantFormResponseString)
+        
       },
       error => {
         console.log(error)
