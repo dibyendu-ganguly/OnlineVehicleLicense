@@ -3,6 +3,8 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Users } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
+import { TemporaryAddress } from '../models/temporary-address.model';
+import { Address } from '../models/address.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +34,12 @@ export class UserService {
     return this.http.get(`${this.baseUrl}`+`/${username}/view-applicant-profile`);
   }
   
+  addTemporaryAddress(username:string, tempAddr: TemporaryAddress, isSame: boolean):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/${username}/address/add-temporary-address/${isSame}`, tempAddr, {responseType: 'text', observe: 'response'});
+  }
+
+  addPermanentAddress(username:string, addr: Address):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/${username}/address/add-address`, addr, {responseType: 'text', observe: 'response'});
+  }
 
 }
