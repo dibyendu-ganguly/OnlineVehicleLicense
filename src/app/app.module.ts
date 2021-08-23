@@ -29,6 +29,9 @@ import { AddressComponent } from './address/address.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { DatePipe } from '@angular/common';
+import { RtoOfficeComponent } from './rto-office/rto-office.component';
+import { RtoOfficerComponent } from './rto-officer/rto-officer.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -56,7 +59,10 @@ import { DatePipe } from '@angular/common';
     AboutUsComponent,
     AddressComponent,
     DocumentsComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    RtoOfficeComponent,
+    RtoOfficerComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

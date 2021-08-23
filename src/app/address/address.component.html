@@ -143,13 +143,13 @@
                                 <label for="inputHouse">House</label>
                             </div>
                             <div class="col">
-                                <div *ngIf="permanentAddressForm.controls['house'].invalid &&(permanentAddressForm.controls['house'].dirty || permanentAddressForm.controls['house'].touched)"
+                                <div *ngIf="permanentAddressForm.controls['permanentHouse'].invalid &&(permanentAddressForm.controls['permanentHouse'].dirty || permanentAddressForm.controls['permanentHouse'].touched)"
                                         class="text-danger text-right">
                                     <small>
-                                        <strong *ngIf="house.errors?.required">House is required.</strong>
+                                        <strong *ngIf="permanentHouse.errors?.required">House is required.</strong>
                                     </small>
                                 </div>
-                                <div *ngIf="permanentAddressForm.controls['house'].valid &&(permanentAddressForm.controls['house'].dirty || permanentAddressForm.controls['house'].touched)"
+                                <div *ngIf="permanentAddressForm.controls['permanentHouse'].valid &&(permanentAddressForm.controls['permanentHouse'].dirty || permanentAddressForm.controls['permanentHouse'].touched)"
                                         class="text-success text-right">
                                     <small>
                                         <strong><i class="bi bi-check-lg"></i></strong>
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input formControlName="house" type="text" class="form-control" id="inputHouse" placeholder="Einstein Apartments" oninput="this.value = this.value.toUpperCase()">
+                        <input [readonly]="isAddressSame" formControlName="permanentHouse" type="text" class="form-control" id="inputHouse" placeholder="Einstein Apartments" oninput="this.value = this.value.toUpperCase()">
                     </div>
                     <!--Landmark-->
                     <div class="form-group">
@@ -166,9 +166,8 @@
                                 <label for="inputLandmark">Landmark</label>
                             </div>
                         </div>
-                        <input formControlName="landmark" type="text" class="form-control" id="inputLandmark" placeholder="Bandstand" oninput="this.value = this.value.toUpperCase()">
-                    </div>
-                    
+                        <input [readonly]="isAddressSame" formControlName="permanentLandmark" type="text" class="form-control" id="inputLandmark" placeholder="Bandstand" oninput="this.value = this.value.toUpperCase()">
+                    </div>                   
                     <div class="form-row">
                         <!--City-->
                         <div class="form-group">
@@ -177,13 +176,13 @@
                                     <label for="inputCity">City</label>
                                 </div>
                                 <div class="col">
-                                    <div *ngIf="permanentAddressForm.controls['city'].invalid &&(permanentAddressForm.controls['city'].dirty || permanentAddressForm.controls['city'].touched)"
+                                    <div *ngIf="permanentAddressForm.controls['permanentCity'].invalid &&(permanentAddressForm.controls['permanentCity'].dirty || permanentAddressForm.controls['permanentCity'].touched)"
                                             class="text-danger text-right">
                                         <small>
-                                            <strong *ngIf="city.errors?.required">City is required.</strong>
+                                            <strong *ngIf="permanentCity.errors?.required">City is required.</strong>
                                         </small>
                                     </div>
-                                    <div *ngIf="permanentAddressForm.controls['city'].valid &&(permanentAddressForm.controls['city'].dirty || permanentAddressForm.controls['city'].touched)"
+                                    <div *ngIf="permanentAddressForm.controls['permanentCity'].valid &&(permanentAddressForm.controls['permanentCity'].dirty || permanentAddressForm.controls['permanentCity'].touched)"
                                             class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -191,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input formControlName="city" type="text" class="form-control" id="inputCity" placeholder="Pune" oninput="this.value = this.value.toUpperCase()">
+                            <input [readonly]="isAddressSame" formControlName="permanentCity" type="text" class="form-control" id="inputCity" placeholder="Pune" oninput="this.value = this.value.toUpperCase()">
                         </div>
                         <!-- State -->
                         <div class="form-group col-md-4">
@@ -214,8 +213,8 @@
                                 </div>
                              </div>
                           </div>
-                          <select formControlName="permanentState" id="inputPermanentState" class="form-control">
-                            <option selected>Select...</option>
+                          <select [attr.disabled]="isAddressSame ? '' : null" formControlName="permanentState" id="inputPermanentState" class="form-control">
+                            <option selected disabled>Select...</option>
                             <option *ngFor="let state of stateList" value={{state}}>
                                 {{ state }}
                             </option>
@@ -228,16 +227,16 @@
                                 <label for="inputPincode">Pincode</label>
                               </div>
                               <div class="col">
-                                <div *ngIf="permanentAddressForm.controls['pincode'].invalid &&(permanentAddressForm.controls['pincode'].dirty || permanentAddressForm.controls['pincode'].touched)"
+                                <div *ngIf="permanentAddressForm.controls['permanentPincode'].invalid &&(permanentAddressForm.controls['permanentPincode'].dirty || permanentAddressForm.controls['permanentPincode'].touched)"
                                         class="text-danger text-right">
                                     <small>
-                                        <strong *ngIf="pincode.errors?.required">Pincode is required.</strong>
+                                        <strong *ngIf="permanentPincode.errors?.required && !isAddressSame">Pincode is required.</strong>
                                     </small>
                                     <small>
-                                        <strong *ngIf="pincode.errors?.pattern">Pincode should consist of 6 digits only.</strong>
+                                        <strong *ngIf="permanentPincode.errors?.pattern && !isAddressSame">Pincode should consist of 6 digits only.</strong>
                                     </small>
                                 </div>
-                                <div *ngIf="permanentAddressForm.controls['pincode'].valid &&(permanentAddressForm.controls['pincode'].dirty || permanentAddressForm.controls['pincode'].touched)"
+                                <div *ngIf="permanentAddressForm.controls['permanentPincode'].valid &&(permanentAddressForm.controls['permanentPincode'].dirty || permanentAddressForm.controls['permanentPincode'].touched)"
                                         class="text-success text-right">
                                     <small>
                                         <strong><i class="bi bi-check-lg"></i></strong>
@@ -245,12 +244,12 @@
                                 </div>
                               </div>
                           </div>
-                          <input formControlName="pincode" type="text" class="form-control" id="inputPincode"  placeholder="893274">
+                          <input [readonly]="isAddressSame" formControlName="permanentPincode" type="text" class="form-control" id="inputPincode"  placeholder="893274">
                       </div>
                     </div>
                     <div class="form-check">
                         <input formControlName="isSame" mdbCheckbox class="form-check-input" type="checkbox"
-                            id="isSame" />
+                            id="isSame" (change)="onChange($event)" />
                         <label class="form-check-label" for="isSame">
                             Permanent Address is same as Present Address
                         </label>
@@ -262,7 +261,7 @@
                 </form>
                 <div class="row">
                     <div class="col-3">
-                        <button [disabled]="permanentAddressForm.invalid" type="submit" 
+                        <button [disabled]="(temporaryAddressForm.invalid && isAddressSame) || (temporaryAddressForm.invalid && permanentAddressForm.invalid)" type="submit" 
                         class="btn bg-olive text-white mb-2 mr-2" (click)="onSubmit()">Save</button>
                         <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
                         <button routerLink="/user-application" class="btn bg-olive text-white mb-2 mr-2">Next</button>
@@ -286,133 +285,3 @@
     </div>
 </div>
 
-<!-- <div class="container-fluid">
-   <div class="card mb-4">
-    <div class="card-header">All Pages</div>
-    <div class="card-body">
-        <div class="datatable table-responsive">
-            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Page Title</th>
-                        <th>Page Details</th>
-                        <th>Views</th>
-                        <th>Created By</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            <a href="#">
-                                Lifestyle
-                            </a>
-                        </td>
-                        <td>Details</td>
-                        <td>61</td>
-                        <td>Md. A. Barik</td>
-                        <td>
-                            <div class="badge badge-success">Published
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-blue btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                </svg></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-red btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                    </path>
-                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                </svg></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <a href="#">
-                                Loved
-                            </a>
-                        </td>
-                        <td>Details</td>
-                        <td>61</td>
-                        <td>Md. A. Barik</td>
-                        <td>
-                            <div class="badge badge-success">Published
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-blue btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                </svg></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-red btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                    </path>
-                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                </svg></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>
-                            <a href="#">
-                                Programming
-                            </a>
-                        </td>
-                        <td>Details</td>
-                        <td>61</td>
-                        <td>Md. A. Barik</td>
-                        <td>
-                            <div class="badge badge-success">Published
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-blue btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                </svg></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-red btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                    </path>
-                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                </svg></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div> 
-</div> -->
