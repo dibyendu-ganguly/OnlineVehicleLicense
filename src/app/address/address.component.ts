@@ -52,16 +52,24 @@ export class AddressComponent implements OnInit {
     "Puducherry"
   ];
 
+  isAddressSame = false;
+
   temporaryAddressForm !: FormGroup;
   permanentAddressForm !: FormGroup;
+
+  isSame !: FormControl;
 
   house !: FormControl;
   landmark !: FormControl;
   city !: FormControl;
   state !: FormControl;
-  permanentState !: FormControl;
   pincode !: FormControl;
-  isSame !: FormControl;
+  
+  permanentHouse !: FormControl;
+  permanentLandmark !: FormControl;
+  permanentCity !: FormControl;
+  permanentState !: FormControl;
+  permanentPincode !: FormControl;
 
   addressFormSubmitted = false;
 
@@ -93,10 +101,16 @@ export class AddressComponent implements OnInit {
     this.house = new FormControl(null, [Validators.required]);
     this.landmark = new FormControl(null);
     this.city = new FormControl(null, [Validators.required]);
-    this.permanentState = new FormControl(null, [Validators.required]);
     this.state = new FormControl({value: "MAHARASHTRA", disabled: true}, [Validators.required]);
     this.pincode = new FormControl(null, [Validators.required, Validators.pattern('^[0-9]{6}$')]);
+    
     this.isSame = new FormControl(false);
+
+    this.permanentHouse = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required]);
+    this.permanentLandmark = new FormControl({value: null, disabled: this.isAddressSame});
+    this.permanentCity = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required]);
+    this.permanentState = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required]);
+    this.permanentPincode = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required, Validators.pattern('^[0-9]{6}$')]);
 
     this.temporaryAddressForm = new FormGroup(
       {
@@ -110,11 +124,11 @@ export class AddressComponent implements OnInit {
 
     this.permanentAddressForm = new FormGroup(
       {
-        'house': this.house,
-        'landmark': this.landmark,
-        'city': this.city,
+        'permanentHouse': this.permanentHouse,
+        'permanentLandmark': this.permanentLandmark,
+        'permanentCity': this.permanentCity,
         'permanentState': this.permanentState,
-        'pincode': this.pincode,
+        'permanentPincode': this.permanentPincode,
         'isSame': this.isSame,
       }
     );
@@ -132,7 +146,7 @@ export class AddressComponent implements OnInit {
     this.newTempAddr.state = this.temporaryAddressForm.controls['state'].value;
     this.newTempAddr.pincode = this.temporaryAddressForm.controls['pincode'].value;
 
-    this.userService.addTemporaryAddress(this.userName, this.newTempAddr, false).subscribe(
+    this.userService.addTemporaryAddress(this.userName, this.newTempAddr, this.isSame.value).subscribe(
       data => {
         let resSTR = JSON.stringify(data);
         let resJSON = JSON.parse(resSTR);
@@ -156,17 +170,20 @@ export class AddressComponent implements OnInit {
         this.addressResponseStatus = resJSON.status
       }
     );
+
+    this.temporaryAddressForm.reset();
+    this.permanentAddressForm.reset();
   }
 
   addPermanentAddress(){
       console.log("In Permanent Address...");
       console.log(this.permanentAddressForm);
       this.addressFormSubmitted = true;
-      this.permanentAddress.house = this.permanentAddressForm.controls['house'].value;
-      this.permanentAddress.landmark = this.permanentAddressForm.controls['landmark'].value;
-      this.permanentAddress.city = this.permanentAddressForm.controls['city'].value;
+      this.permanentAddress.house = this.permanentAddressForm.controls['permanentHouse'].value;
+      this.permanentAddress.landmark = this.permanentAddressForm.controls['permanentLandmark'].value;
+      this.permanentAddress.city = this.permanentAddressForm.controls['permanentCity'].value;
       this.permanentAddress.state = this.permanentAddressForm.controls['permanentState'].value;
-      this.permanentAddress.pincode = this.permanentAddressForm.controls['pincode'].value;
+      this.permanentAddress.pincode = this.permanentAddressForm.controls['permanentPincode'].value;
 
       this.userService.addPermanentAddress(this.userName, this.permanentAddress).subscribe(
         data => {
@@ -196,6 +213,17 @@ export class AddressComponent implements OnInit {
 
   onSubmit(){
     this.addTemporaryAddress();
-    this.addPermanentAddress();
+    if(!this.isAddressSame){
+      this.addPermanentAddress();
+    }
+  }
+
+  onChange(e : any){
+    if(e.target.checked){
+      this.isAddressSame = true;
+    }
+    else{
+      this.isAddressSame = false;
+    }
   }
 }
