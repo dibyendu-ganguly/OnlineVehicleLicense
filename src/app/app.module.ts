@@ -28,6 +28,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { AddressComponent } from './address/address.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -60,7 +61,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
