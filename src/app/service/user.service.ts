@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Users } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
+import { Application } from '../models/application.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,8 @@ export class UserService {
     return this.http.get(`${this.baseUrl}`+`/${username}/view-applicant-profile`);
   }
   
+  addApplicationProfile(username:string, application: Application):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/${username}/add-application`,application,{responseType: 'text', observe: 'response'});
+  }
 
 }

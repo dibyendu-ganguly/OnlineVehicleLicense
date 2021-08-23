@@ -110,6 +110,7 @@ export class ProfileComponent implements OnInit {
       'vehicleNumber' : this.vehicleNumber
     });
   }
+  
 
   newApplicantProfile : Applicant = new Applicant();
   addApplicant(){
