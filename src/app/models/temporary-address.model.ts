@@ -1,6 +1,5 @@
 export class TemporaryAddress {
 
-    addrId : string = "";
     house : string = "";
     city : string = "";
     state : string = "";
