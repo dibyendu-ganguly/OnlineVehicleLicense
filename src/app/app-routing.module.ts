@@ -15,6 +15,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { AddressComponent } from './address/address.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes : Routes = [
   {
@@ -64,6 +65,10 @@ const routes : Routes = [
   {
     path : 'user',
     component : UserDashboardComponent
+  },
+  {
+    path : 'admin',
+    component : AdminComponent
   },
   {
     path: 'forbidden',

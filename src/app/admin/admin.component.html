@@ -1,1 +1,64 @@
-<p>admin works!</p>
+<!-- Page Content -->
+<div id="page-content-wrapper">
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Admin Dashboard</h1>
+        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
+            larger screens. When toggled using the button below, the menu will change.</p>
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is
+            optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which
+            will toggle the menu when clicked.</p>
+    </div>
+
+    <div class="container-fluid  mb-4">
+        <div class="accordion" id="accordionExample">
+            <!--Add RTO Office-->
+                <div class="card">
+                    <h4 class="card-header bg-olive-dark text-white" id="headingOne">
+                        <div class="row">
+                            <div class="col">Profile</div>
+                            <div class="col text-right">
+                                <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </h4>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                                                      
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <!--Add RTO Officer-->
+            <div class="card">
+                <h4 class="card-header bg-olive-light text-white" id="headingTwo">
+                    <div class="row">
+                        <div class="col">Address</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
+                        of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
