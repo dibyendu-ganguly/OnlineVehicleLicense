@@ -30,9 +30,15 @@ export class UserService {
     return this.http.post(`${this.baseUrl}`+`/${username}/add-applicant-profile`,applicant,{responseType: 'text', observe: 'response'});
   }
 
-  viewApplicantProfile(username:string):Observable<any>{
-    return this.http.get(`${this.baseUrl}`+`/${username}/view-applicant-profile`);
+  viewApplicantProfile(username:string):Observable<Applicant>{
+    return this.http.get<Applicant>(`${this.baseUrl}`+`/${username}/view-applicant-profile`);
   }
+
+  updateApplicantProfile(username:string, applicant: Applicant):Observable<HttpResponse<String>>{
+    return this.http.put(`${this.baseUrl}`+`/${username}/update-applicant-profile`,applicant,{responseType: 'text', observe: 'response'});
+  }
+
+
   
   addTemporaryAddress(username:string, tempAddr: TemporaryAddress, isSame: boolean):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/${username}/address/add-temporary-address/${isSame}`, tempAddr, {responseType: 'text', observe: 'response'});

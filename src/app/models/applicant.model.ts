@@ -6,7 +6,7 @@ export class Applicant {
     firstName : string = "";
     middleName : string = "";
     lastName : string = "";
-    dateOfBirth : Date = new Date();
+    dateOfBirth : string = "";
     placeOfBirth : string = "";
     gender : Gender = Gender.MALE;
     qualification : string = "";
