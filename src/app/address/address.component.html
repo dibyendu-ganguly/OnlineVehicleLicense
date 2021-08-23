@@ -5,18 +5,17 @@
     <div class="container-fluid">
         <h1 class="mt-4">Address</h1>
         <ul>
-            <li>All the fields except middle name is required.</li>
-            <li>Mobile number should consists of 10 digits only. Do not put the country code here</li>
-            <li>Vehicle number consists of 12 characters including <mark>-</mark>, alphabets and digits</li>
+            <li>All the fields except Landmark is required.</li>
+            <li>Pincode should be of 6 digits only.</li>
         </ul>
         <p>Submit button will be enabled once all the required fields are corectly entered</p>
     </div>
-
+    <!-- Present Address -->
     <div class="container-fluid mb-4">
         <div class="card">
-            <h4 class="card-header">House</h4>
+            <h4 class="card-header">Present Address</h4>
             <div class="card-body">
-                <form>
+                <form [formGroup]="temporaryAddressForm">
                     <!--House-->
                     <div class="form-group">
                         <div class="row">
@@ -24,42 +23,264 @@
                                 <label for="inputHouse">House</label>
                             </div>
                             <div class="col">
-
+                                <div *ngIf="temporaryAddressForm.controls['house'].invalid &&(temporaryAddressForm.controls['house'].dirty || temporaryAddressForm.controls['house'].touched)"
+                                        class="text-danger text-right">
+                                    <small>
+                                        <strong *ngIf="house.errors?.required">House is required.</strong>
+                                    </small>
+                                </div>
+                                <div *ngIf="temporaryAddressForm.controls['house'].valid &&(temporaryAddressForm.controls['house'].dirty || temporaryAddressForm.controls['house'].touched)"
+                                        class="text-success text-right">
+                                    <small>
+                                        <strong><i class="bi bi-check-lg"></i></strong>
+                                    </small>
+                                </div>
                             </div>
                         </div>
-                      <input type="text" class="form-control" id="inputHouse" placeholder="1234 Main St" oninput="this.value = this.value.toUpperCase()">
+                        <input formControlName="house" type="text" class="form-control" id="inputHouse" placeholder="Einstein Apartments" oninput="this.value = this.value.toUpperCase()">
                     </div>
+                    <!--Landmark-->
                     <div class="form-group">
-                      <label for="inputAddress2">Address 2</label>
-                      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputLandmark">Landmark</label>
+                            </div>
+                        </div>
+                        <input formControlName="landmark" type="text" class="form-control" id="inputLandmark" placeholder="Bandstand" oninput="this.value = this.value.toUpperCase()">
                     </div>
+                    
                     <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <!--City-->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputCity">City</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="temporaryAddressForm.controls['city'].invalid &&(temporaryAddressForm.controls['city'].dirty || temporaryAddressForm.controls['city'].touched)"
+                                            class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="city.errors?.required">City is required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="temporaryAddressForm.controls['city'].valid &&(temporaryAddressForm.controls['city'].dirty || temporaryAddressForm.controls['city'].touched)"
+                                            class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <input formControlName="city" type="text" class="form-control" id="inputCity" placeholder="Pune" oninput="this.value = this.value.toUpperCase()">
+                        </div>
+                        <!-- State -->
+                        <div class="form-group col-md-4">
+                          <div class="row">
+                              <div class="col">
+                                <label for="inputState">State</label>
+                              </div>
+                              <div class="col">
+                                <div *ngIf="temporaryAddressForm.controls['state'].invalid &&(temporaryAddressForm.controls['state'].dirty || temporaryAddressForm.controls['state'].touched)"
+                                        class="text-danger text-right">
+                                    <small>
+                                        <strong *ngIf="state.errors?.required">State is required.</strong>
+                                    </small>
+                                </div>
+                                <div *ngIf="temporaryAddressForm.controls['state'].valid &&(temporaryAddressForm.controls['state'].dirty || temporaryAddressForm.controls['state'].touched)"
+                                        class="text-success text-right">
+                                    <small>
+                                        <strong><i class="bi bi-check-lg"></i></strong>
+                                    </small>
+                                </div>
+                             </div>
+                          </div>
+                          <input formControlName="city" type="text" class="form-control" 
+                          id="inputCity" placeholder="Maharashtra" value="MAHARASHTRA" 
+                          oninput="this.value = this.value.toUpperCase()" readonly>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                          <option selected>Choose...</option>
-                          <option>...</option>
-                        </select>
-                      </div>
+                      <!-- Pincode -->
                       <div class="form-group col-md-2">
-                        <label for="inputZip">Zip</label>
-                        <input type="text" class="form-control" id="inputZip">
+                          <div class="row">
+                              <div class="col">
+                                <label for="inputPincode">Pincode</label>
+                              </div>
+                              <div class="col">
+                                <div *ngIf="temporaryAddressForm.controls['pincode'].invalid &&(temporaryAddressForm.controls['pincode'].dirty || temporaryAddressForm.controls['pincode'].touched)"
+                                        class="text-danger text-right">
+                                    <small>
+                                        <strong *ngIf="pincode.errors?.required">Pincode is required.</strong>
+                                    </small>
+                                    <small>
+                                        <strong *ngIf="pincode.errors?.pattern">Pincode should consist of 6 digits only.</strong>
+                                    </small>
+                                </div>
+                                <div *ngIf="temporaryAddressForm.controls['pincode'].valid &&(temporaryAddressForm.controls['pincode'].dirty || temporaryAddressForm.controls['pincode'].touched)"
+                                        class="text-success text-right">
+                                    <small>
+                                        <strong><i class="bi bi-check-lg"></i></strong>
+                                    </small>
+                                </div>
+                              </div>
+                          </div>
+                          <input formControlName="pincode" type="text" class="form-control" id="inputPincode"  placeholder="893274">
                       </div>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Permanet Address -->
+    <div class="container-fluid mb-4">
+        <div class="card">
+            <h4 class="card-header">Permanent Address</h4>
+            <div class="card-body">
+                <form [formGroup]="permanentAddressForm">
+                    <!--House-->
                     <div class="form-group">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                          Check me out
-                        </label>
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputHouse">House</label>
+                            </div>
+                            <div class="col">
+                                <div *ngIf="permanentAddressForm.controls['house'].invalid &&(permanentAddressForm.controls['house'].dirty || permanentAddressForm.controls['house'].touched)"
+                                        class="text-danger text-right">
+                                    <small>
+                                        <strong *ngIf="house.errors?.required">House is required.</strong>
+                                    </small>
+                                </div>
+                                <div *ngIf="permanentAddressForm.controls['house'].valid &&(permanentAddressForm.controls['house'].dirty || permanentAddressForm.controls['house'].touched)"
+                                        class="text-success text-right">
+                                    <small>
+                                        <strong><i class="bi bi-check-lg"></i></strong>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <input formControlName="house" type="text" class="form-control" id="inputHouse" placeholder="Einstein Apartments" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                    <!--Landmark-->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputLandmark">Landmark</label>
+                            </div>
+                        </div>
+                        <input formControlName="landmark" type="text" class="form-control" id="inputLandmark" placeholder="Bandstand" oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                    
+                    <div class="form-row">
+                        <!--City-->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputCity">City</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="permanentAddressForm.controls['city'].invalid &&(permanentAddressForm.controls['city'].dirty || permanentAddressForm.controls['city'].touched)"
+                                            class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="city.errors?.required">City is required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="permanentAddressForm.controls['city'].valid &&(permanentAddressForm.controls['city'].dirty || permanentAddressForm.controls['city'].touched)"
+                                            class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <input formControlName="city" type="text" class="form-control" id="inputCity" placeholder="Pune" oninput="this.value = this.value.toUpperCase()">
+                        </div>
+                        <!-- State -->
+                        <div class="form-group col-md-4">
+                          <div class="row">
+                              <div class="col">
+                                <label for="inputPermanentState">State</label>
+                              </div>
+                              <div class="col">
+                                <div *ngIf="permanentAddressForm.controls['permanentState'].invalid &&(permanentAddressForm.controls['permanentState'].dirty || permanentAddressForm.controls['permanentState'].touched)"
+                                        class="text-danger text-right">
+                                    <small>
+                                        <strong *ngIf="permanentState.errors?.required">State is required.</strong>
+                                    </small>
+                                </div>
+                                <div *ngIf="permanentAddressForm.controls['permanentState'].valid &&(permanentAddressForm.controls['permanentState'].dirty || permanentAddressForm.controls['permanentState'].touched)"
+                                        class="text-success text-right">
+                                    <small>
+                                        <strong><i class="bi bi-check-lg"></i></strong>
+                                    </small>
+                                </div>
+                             </div>
+                          </div>
+                          <select formControlName="permanentState" id="inputPermanentState" class="form-control">
+                            <option selected>Select...</option>
+                            <option *ngFor="let state of stateList" value={{state}}>
+                                {{ state }}
+                            </option>
+                          </select>
+                      </div>
+                      <!-- Pincode -->
+                      <div class="form-group col-md-2">
+                          <div class="row">
+                              <div class="col">
+                                <label for="inputPincode">Pincode</label>
+                              </div>
+                              <div class="col">
+                                <div *ngIf="permanentAddressForm.controls['pincode'].invalid &&(permanentAddressForm.controls['pincode'].dirty || permanentAddressForm.controls['pincode'].touched)"
+                                        class="text-danger text-right">
+                                    <small>
+                                        <strong *ngIf="pincode.errors?.required">Pincode is required.</strong>
+                                    </small>
+                                    <small>
+                                        <strong *ngIf="pincode.errors?.pattern">Pincode should consist of 6 digits only.</strong>
+                                    </small>
+                                </div>
+                                <div *ngIf="permanentAddressForm.controls['pincode'].valid &&(permanentAddressForm.controls['pincode'].dirty || permanentAddressForm.controls['pincode'].touched)"
+                                        class="text-success text-right">
+                                    <small>
+                                        <strong><i class="bi bi-check-lg"></i></strong>
+                                    </small>
+                                </div>
+                              </div>
+                          </div>
+                          <input formControlName="pincode" type="text" class="form-control" id="inputPincode"  placeholder="893274">
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                  </form>
+                    <div class="form-check">
+                        <input formControlName="isSame" mdbCheckbox class="form-check-input" type="checkbox"
+                            id="isSame" />
+                        <label class="form-check-label" for="isSame">
+                            Permanent Address is same as Present Address
+                        </label>
+                    </div>
+                    <p>
+                        Note: If you are a Foreign Individual, please check the above box.
+                    </p>
+                    
+                </form>
+                <div class="row">
+                    <div class="col-3">
+                        <button [disabled]="permanentAddressForm.invalid" type="submit" 
+                        class="btn bg-olive text-white mb-2 mr-2" (click)="onSubmit()">Save</button>
+                        <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
+                        <button routerLink="/user-application" class="btn bg-olive text-white mb-2 mr-2">Next</button>
+                    </div>
+                    
+                    <div class="col">
+                        <div class="form-signin alert alert-dismissible fade show"
+                            [ngClass]="addressResponseStatus  == 500 ?  'alert-danger ' : addressResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                            role="alert" *ngIf="addressFormSubmitted">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="addressFormSubmitted=false">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <div *ngIf="addressResponseStatus  == 500;"><strong>Internal Sever Error</strong></div>
+                            <div *ngIf="addressResponseStatus  != 500;"><strong>{{addressFormResponseString}}</strong></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
