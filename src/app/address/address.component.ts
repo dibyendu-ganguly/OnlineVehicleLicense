@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AddressType } from '../models/address-type.enum';
 import { Address } from '../models/address.model';
 import { TemporaryAddress } from '../models/temporary-address.model';
 import { UserService } from '../service/user.service';
@@ -75,6 +76,8 @@ export class AddressComponent implements OnInit {
   permanentPincode !: FormControl;
 
   addressFormSubmitted = false;
+  temporaryAddressFormSubmitted = false;
+  permanentAddressFormSubmitted = false;
 
   addressFormResponseString?: String;
   addressResponseStatus?: Number;
@@ -237,6 +240,82 @@ export class AddressComponent implements OnInit {
           this.addressResponseStatus = resJSON.status
         }
       );
+  }
+
+  updateTemporaryAddress(){
+    console.log("In Temporary Address Update...");
+    console.log(this.temporaryAddressForm);
+    this.temporaryAddressFormSubmitted = true;
+    this.newTempAddr.house = this.temporaryAddressForm.controls['house'].value;
+    this.newTempAddr.landmark = this.temporaryAddressForm.controls['landmark'].value;
+    this.newTempAddr.city = this.temporaryAddressForm.controls['city'].value;
+    this.newTempAddr.state = this.temporaryAddressForm.controls['state'].value;
+    this.newTempAddr.pincode = this.temporaryAddressForm.controls['pincode'].value;
+
+    this.userService.updateTemporaryAddress(this.userName, this.newTempAddr, AddressType.PRESENT).subscribe(
+      data => {
+        let resSTR = JSON.stringify(data);
+        let resJSON = JSON.parse(resSTR);
+        console.log(data)
+        console.log(data.body)
+        console.log(data.status)
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.addressFormResponseString = resJSON.body
+        this.addressResponseStatus = resJSON.status
+
+        console.log(this.addressFormResponseString);
+      },
+      error => {
+        console.log(error)
+        let resSTR = JSON.stringify(error);
+        let resJSON = JSON.parse(resSTR);
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.addressFormResponseString = resJSON.body
+        this.addressResponseStatus = resJSON.status
+      }
+    );
+
+    this.temporaryAddressForm.reset();
+  }
+
+  updatePermanentAddress(){
+    console.log("In Permanent Address Update...");
+    console.log(this.permanentAddressForm);
+    this.permanentAddressFormSubmitted = true;
+    this.permanentAddress.house = this.permanentAddressForm.controls['permanentHouse'].value;
+    this.permanentAddress.landmark = this.permanentAddressForm.controls['permanentLandmark'].value;
+    this.permanentAddress.city = this.permanentAddressForm.controls['permanentCity'].value;
+    this.permanentAddress.state = this.permanentAddressForm.controls['permanentState'].value;
+    this.permanentAddress.pincode = this.permanentAddressForm.controls['permanentPincode'].value;
+
+    this.userService.updatePermanentAddress(this.userName, this.permanentAddress, AddressType.PERMANENT).subscribe(
+      data => {
+        let resSTR = JSON.stringify(data);
+        let resJSON = JSON.parse(resSTR);
+        console.log(data)
+        console.log(data.body)
+        console.log(data.status)
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.addressFormResponseString = resJSON.body
+        this.addressResponseStatus = resJSON.status
+
+        console.log(this.addressFormResponseString);
+      },
+      error => {
+        console.log(error)
+        let resSTR = JSON.stringify(error);
+        let resJSON = JSON.parse(resSTR);
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.addressFormResponseString = resJSON.body
+        this.addressResponseStatus = resJSON.status
+      }
+    );
+
+    this.permanentAddressForm.reset();
   }
 
   onSubmit(){
