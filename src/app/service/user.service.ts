@@ -38,14 +38,20 @@ export class UserService {
     return this.http.put(`${this.baseUrl}`+`/${username}/update-applicant-profile`,applicant,{responseType: 'text', observe: 'response'});
   }
 
-
-  
   addTemporaryAddress(username:string, tempAddr: TemporaryAddress, isSame: boolean):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/${username}/address/add-temporary-address/${isSame}`, tempAddr, {responseType: 'text', observe: 'response'});
   }
 
   addPermanentAddress(username:string, addr: Address):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/${username}/address/add-address`, addr, {responseType: 'text', observe: 'response'});
+  }
+
+  viewPresentAddress(username:string):Observable<TemporaryAddress> {
+    return this.http.get<TemporaryAddress>(`${this.baseUrl}`+`/${username}/address/view-present-address`);
+  }
+
+  viewPermanentAddress(username:string):Observable<Address> {
+    return this.http.get<Address>(`${this.baseUrl}`+`/${username}/address/view-permanent-address`);
   }
 
 }
