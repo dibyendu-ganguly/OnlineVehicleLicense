@@ -28,13 +28,28 @@
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
                     <div class="card-body">
-                        <form class="form-inline">
+                        <form [formGroup]="rtoForm" class="form-inline">
                             <div class="form-group mx-sm-3 mb-2">
-                                <label for="inputPassword2" class="sr-only">Name of the RTO</label>
-                                <input type="text" class="form-control" id="inputPassword2" placeholder="RTO Name">
+                                <label for="rto-office" class="sr-only">Name of the RTO Office</label>
+                                <input formControlName="rtoOffice" type="text" class="form-control" 
+                                id="rto-office" placeholder="RTO Office Name" oninput="this.value = this.value.toUpperCase()">
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2">Add RTO</button>
+                            <button type="submit" class="btn btn-primary mb-2" (click)="addRtoOffice()">Add RTO</button>
                         </form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-signin alert alert-dismissible fade show"
+                                    [ngClass]="responseStatus  == 500 ?  'alert-danger ' : responseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                                    role="alert" *ngIf="rtoFormSubmitted">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="rtoFormSubmitted=false">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <div *ngIf="responseStatus  == 500;"><strong>Internal Sever Error</strong></div>
+                                    <div *ngIf="responseStatus  != 500;"><strong>{{responseString}}</strong></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,7 +59,7 @@
             <div class="card">
                 <h4 class="card-header bg-olive-light text-white" id="headingTwo">
                     <div class="row">
-                        <div class="col">Address</div>
+                        <div class="col">Add RTO Officer</div>
                         <div class="col text-right">
                             <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">

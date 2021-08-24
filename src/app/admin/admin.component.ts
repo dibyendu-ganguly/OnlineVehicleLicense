@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RtoOffice } from '../models/rto-office.model';
 import { RtoOfficer } from '../models/rto-officer.model';
 import { Users } from '../models/user.model';
+import { RtoOfficeService } from '../service/rto-office.service';
+import { RtoOfficerService } from '../service/rto-officer.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,19 +15,25 @@ import { Users } from '../models/user.model';
 export class AdminComponent implements OnInit {
 
   regForm !: FormGroup;
+  rtoForm !: FormGroup;
 
   username !: FormControl;
   email !: FormControl;
   password !: FormControl;
   confirmPassword !: FormControl;
 
+  rtoOffice !: FormControl;
+
   regFormSubmitted = false;
+  rtoFormSubmitted = false;
 
   responseString?: String;
   responseStatus?: Number;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private rtoOfficeService : RtoOfficeService,
+    private rtoOfficerService : RtoOfficerService,
   ) { }
 
   isLoggedIn: boolean = false;
@@ -89,6 +98,8 @@ export class AdminComponent implements OnInit {
     this.password = new FormControl(null, [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#%&+=])(?=\\S+$).{8,20}$')]);
     this.confirmPassword = new FormControl(null, [Validators.required]);
 
+    this.rtoOffice = new FormControl(null, [Validators.required]);
+
     this.regForm = new FormGroup({
       'username': this.username,
       'password': this.password,
@@ -96,9 +107,52 @@ export class AdminComponent implements OnInit {
       'confirmPassword': this.confirmPassword
     });
 
+    this.rtoForm = new FormGroup(
+      {
+        'rtoOffice': this.rtoOffice,
+      }
+    );
+
   }
 
   newRTOofficer: RtoOfficer = new RtoOfficer();
+
+  newRTOoffice : RtoOffice = new RtoOffice();
+
+  addRtoOffice() {
+    console.log("In Add RTO Office...");
+    console.log(this.rtoForm);
+    this.newRTOoffice.rtoName = this.rtoForm.controls['rtoOffice'].value;
+    console.log(this.newRTOoffice);
+
+    this.rtoOfficeService.addRtoOffice(this.newRTOoffice).subscribe(
+      data => {
+        let resSTR = JSON.stringify(data);
+        let resJSON = JSON.parse(resSTR);
+        console.log(data)
+        console.log(data.body)
+        console.log(data.status)
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.responseString = resJSON.body
+        this.responseStatus = resJSON.status
+
+        console.log(this.responseString)
+
+        this.rtoFormSubmitted = true;
+        this.rtoForm.reset();
+      },
+      error => {
+        console.log(error)
+        let resSTR = JSON.stringify(error);
+        let resJSON = JSON.parse(resSTR);
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.responseString = resJSON.body
+        this.responseStatus = resJSON.status
+      }
+    );
+  }
 
 
   onSubmit() {
