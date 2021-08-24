@@ -18,4 +18,8 @@ export class RtoOfficeService {
     return this.http.post(`${this.baseUrl}`+`/add-rto-office`, rtoOffice, {responseType: 'text', observe: 'response'});
   }
 
+  getRtoMap():Observable<Map<String,Number>>{
+    return this.http.get<Map<String,Number>>(`${this.baseUrl}`+'/get-rto-office-map');
+  }
+
 }

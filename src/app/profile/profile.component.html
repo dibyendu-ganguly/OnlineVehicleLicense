@@ -190,6 +190,7 @@
                                 <option value="Graduated or above">Graduated or above</option>
                             </select>
                         </div>
+                        <!--Mobile-->
                         <div class="form-group col-md">
                             <div class="row">
                                 <div class="col">
@@ -214,6 +215,7 @@
                             </div>
                             <input formControlName="mobile" type="tel" class="form-control" id="inputContact4">
                         </div>
+                        <!--Nationality-->
                         <div class="form-group col-md">
                             <div class="row">
                                 <div class="col">
@@ -303,6 +305,7 @@
                         </div>
                     </div>
                     <div class="row">
+                        <!--buttons-->
                         <div class="col-3">
                             <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="!isPresent"
                                 [disabled]="applicantForm.invalid" (click)="addApplicant()">Save</button>
@@ -312,6 +315,7 @@
                             <button routerLink="/user-address" class="btn bg-olive text-white mb-2 mr-2">Next</button>
                         </div>
 
+                        <!--Messages-->
                         <div class="col">
                             <div class="form-signin alert alert-dismissible fade show"
                                 [ngClass]="applicantResponseStatus  == 500 ?  'alert-danger ' : applicantResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"

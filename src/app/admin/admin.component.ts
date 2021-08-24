@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RtoOffice } from '../models/rto-office.model';
 import { RtoOfficer } from '../models/rto-officer.model';
@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   email !: FormControl;
   password !: FormControl;
   confirmPassword !: FormControl;
+  rtoOfficeVal !: FormControl;
 
   rtoOffice !: FormControl;
 
@@ -33,12 +34,14 @@ export class AdminComponent implements OnInit {
   constructor(
     private router: Router,
     private rtoOfficeService : RtoOfficeService,
-    private rtoOfficerService : RtoOfficerService,
+    private rtoOfficerService : RtoOfficerService
   ) { }
 
   isLoggedIn: boolean = false;
   userName?: string;
   role?:string;
+
+  rtoOfficeMap ={};
 
   ngOnInit(): void {
 
@@ -97,14 +100,17 @@ export class AdminComponent implements OnInit {
     this.email = new FormControl(null, [Validators.required, Validators.email]);
     this.password = new FormControl(null, [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#%&+=])(?=\\S+$).{8,20}$')]);
     this.confirmPassword = new FormControl(null, [Validators.required]);
+    this.rtoOfficeVal = new FormControl(null, [Validators.required]);
 
     this.rtoOffice = new FormControl(null, [Validators.required]);
+
 
     this.regForm = new FormGroup({
       'username': this.username,
       'password': this.password,
       'email': this.email,
-      'confirmPassword': this.confirmPassword
+      'confirmPassword': this.confirmPassword,
+      'rtoOfficeVal' : this.rtoOfficeVal
     });
 
     this.rtoForm = new FormGroup(
@@ -112,6 +118,15 @@ export class AdminComponent implements OnInit {
         'rtoOffice': this.rtoOffice,
       }
     );
+
+    this.rtoOfficeService.getRtoMap().subscribe(
+      data => {
+        console.log(data);
+        this.rtoOfficeMap = data;
+        console.log(this.rtoOfficeMap);
+      }
+    );
+
 
   }
 
@@ -140,7 +155,7 @@ export class AdminComponent implements OnInit {
         console.log(this.responseString)
 
         this.rtoFormSubmitted = true;
-        this.rtoForm.reset();
+        this.rtoForm.reset();       
       },
       error => {
         console.log(error)
@@ -154,6 +169,9 @@ export class AdminComponent implements OnInit {
     );
   }
 
+  refresh() {
+    location.reload();
+  }
 
   onSubmit() {
     console.log(this.regForm);

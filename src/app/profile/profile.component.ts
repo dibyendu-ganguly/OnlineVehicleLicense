@@ -201,7 +201,7 @@ export class ProfileComponent implements OnInit {
         console.log(error)
         let resSTR = JSON.stringify(error);
         let resJSON = JSON.parse(resSTR);
-        console.log(resJSON.body)
+        console.log(resJSON.error)
         console.log(resJSON.status)
         this.applicantFormResponseString = resJSON.body
         this.applicantResponseStatus = resJSON.status

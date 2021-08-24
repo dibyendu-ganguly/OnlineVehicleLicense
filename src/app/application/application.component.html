@@ -20,7 +20,7 @@
 
                     <div class="form-row">
                         <!--ApplicationDate-->
-                        <div class="form-group col-md">
+                        <div class="form-group col-md-6">
                             <div class="row">
                                 <div class="col">
                                     <label for="inputApplicationDate">Application Date</label>
@@ -33,7 +33,7 @@
                                                 required.</strong>
                                         </small>
                                     </div>
-                                    <div *ngIf="applicationForm.controls['applicationDate'].invalid && (applicationForm.controls['applicationDate'].dirty || applicationForm.controls['applicationDate'].touched)"
+                                    <div *ngIf="applicationForm.controls['applicationDate'].valid && (applicationForm.controls['applicationDate'].dirty || applicationForm.controls['applicationDate'].touched)"
                                         class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -41,28 +41,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <input formControlName="applicationDate" type="date" class="form-control"
+                            <input formControlName="applicationDate" type="text" class="form-control" value={{today}} readonly
                                 id="inputApplicationDate" oninput="this.value = this.value.toUpperCase()">
                         </div>
                     </div>
-
-
                     <div class="form-row">
-                        <!--Mode Of Payment-->
+                        <!--RTO Office-->
                         <div class="form-group col-md">
                             <div class="row">
-                                <div class="col">
-                                    <label for="inputModeOfPayment">Payment Mode</label>
+                                <div class="col-4">
+                                    <label for="defaultRegisterFormRTO">RTO Office</label>
                                 </div>
                                 <div class="col">
-                                    <div *ngIf="applicationForm.controls['modeOfPayment'].invalid && (applicationForm.controls['modeOfPayment'].dirty || applicationForm.controls['modeOfPayment'].touched)"
+                                    <div *ngIf="applicationForm.controls['rtoOfficeVal'].invalid &&(applicationForm.controls['rtoOfficeVal'].dirty || applicationForm.controls['rtoOfficeVal'].touched)"
                                         class="text-danger text-right">
-                                        <small>
-                                            <strong *ngIf="modeOfPayment.errors?.required">Mode of payment is
+                                        <small class="">
+                                            <strong *ngIf="rtoOfficeVal.errors?.required">RTO office is
                                                 required.</strong>
                                         </small>
                                     </div>
-                                    <div *ngIf="applicationForm.controls['modeOfPayment'].invalid && (applicationForm.controls['modeOfPayment'].dirty || applicationForm.controls['modeOfPayment'].touched)"
+                                    <div *ngIf="applicationForm.controls['rtoOfficeVal'].valid &&(applicationForm.controls['rtoOfficeVal'].dirty || applicationForm.controls['rtoOfficeVal'].touched)"
                                         class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -70,82 +68,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <input formControlName="modeOfPayment" type="text" class="form-control"
-                                id="inputModeOfPayment" oninput="this.value = this.value.toUpperCase()">
-                        </div>
-
-
-                        <!--Amount Paid-->
-                        <div class="form-group col-md">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="amountPaid">Amount Paid</label>
-                                </div>
-                                <div class="col">
-                                    <div *ngIf="applicationForm.controls['amountPaid'].invalid && (applicationForm.controls['amountPaid'].dirty || applicationForm.controls['amountPaid'].touched)"
-                                        class="text-danger text-right">
-                                        <small>
-                                            <strong *ngIf="amountPaid.errors?.required">Mode of payment is
-                                                required.</strong>
-                                        </small>
-                                    </div>
-                                    <div *ngIf="applicationForm.controls['amountPaid'].invalid && (applicationForm.controls['amountPaid'].dirty || applicationForm.controls['amountPaid'].touched)"
-                                        class="text-success text-right">
-                                        <small>
-                                            <strong><i class="bi bi-check-lg"></i></strong>
-                                        </small>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <input formControlName="amountPaid" type="number" class="form-control" id="inputAmountPaid">
-                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-
-                        <!--Payment Status-->
-                        <div class="form-group col-md">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="paymentStatus">Payment Status</label>
-                                </div>
-
-                            </div>
-                            <input formControlName="paymentStatus" type="text" class="form-control" id="paymentStatus"
-                                oninput="this.value = this.value.toUpperCase()">
-                        </div>
-                    </div>
-
-
-
-
-
-
-                    <div class="form-row">
-
-                        <!--Application Status-->
-                        <div class="form-group col-md">
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputGender4">Application Status</label>
-                                </div>
-
-                            </div>
-                            <select formControlName="applicationStatus" class="form-control custom-select mr-sm-2"
-                                id="inputApplicationStatus">
+                            <select formControlName="rtoOfficeVal" class="form-control custom-select mr-sm-2"
+                                id="defaultRegisterFormRTO">
                                 <option selected disabled>Choose...</option>
-                                <option *ngFor="let enum of applicationStatusList | keyvalue" value="{{enum.value}}">
-                                    {{ enum.value}}
+                                <option *ngFor="let rto of rtoOfficeMap | keyvalue" value="{{rto.key}}">
+                                    {{ rto.value }}
                                 </option>
                             </select>
                         </div>
-
                         <!--License Type-->
                         <div class="form-group col-md">
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="col">
                                     <label for="inputGender4">License Type</label>
                                 </div>
                                 <div class="col">
@@ -156,7 +90,7 @@
                                                 required.</strong>
                                         </small>
                                     </div>
-                                    <div *ngIf="applicationForm.controls['applicationType'].invalid && (applicationForm.controls['applicationType'].dirty || applicationForm.controls['applicationType'].touched)"
+                                    <div *ngIf="applicationForm.controls['applicationType'].valid && (applicationForm.controls['applicationType'].dirty || applicationForm.controls['applicationType'].touched)"
                                         class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -173,11 +107,107 @@
                             </select>
                         </div>
                     </div>
-
-
                     <div class="form-row">
-                        <!--Remarks-->
+                        <!--Mode Of Payment-->
                         <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="inputModeOfPayment">Payment Mode</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="applicationForm.controls['modeOfPayment'].invalid && (applicationForm.controls['modeOfPayment'].dirty || applicationForm.controls['modeOfPayment'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="modeOfPayment.errors?.required">Mode of payment is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="applicationForm.controls['modeOfPayment'].valid && (applicationForm.controls['modeOfPayment'].dirty || applicationForm.controls['modeOfPayment'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                                <select formControlName="modeOfPayment" class="form-control custom-select mr-sm-2"
+                                id="inputModeOfPayment">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let modes of paymentModes " value="{{modes}}">
+                                    {{ modes }}
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <!--Amount Paid-->
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="amountPaid">Amount Paid</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="applicationForm.controls['amountPaid'].invalid && (applicationForm.controls['amountPaid'].dirty || applicationForm.controls['amountPaid'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="amountPaid.errors?.required">Amount Paid is required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="applicationForm.controls['amountPaid'].valid && (applicationForm.controls['amountPaid'].dirty || applicationForm.controls['amountPaid'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <input formControlName="amountPaid" type="number" class="form-control" id="inputAmountPaid">
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="form-row">
+
+                        <Payment Status>    //COMMENT OUT
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="paymentStatus">Payment Status</label>
+                                </div>
+
+                            </div>
+                            <input formControlName="paymentStatus" type="text" class="form-control" id="paymentStatus"
+                                oninput="this.value = this.value.toUpperCase()">
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="form-row"> -->
+
+                        <!--Application Status-->
+                        <!-- <div class="form-group col-md">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputGender4">Application Status</label>
+                                </div>
+
+                            </div>
+                            <select formControlName="applicationStatus" class="form-control custom-select mr-sm-2"
+                                id="inputApplicationStatus">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let enum of applicationStatusList | keyvalue" value="{{enum.value}}">
+                                    {{ enum.value}}
+                                </option>
+                            </select>
+                        </div> -->
+
+                        
+                    <!-- </div> -->
+
+
+                    <!-- <div class="form-row"> -->
+                        <!--Remarks-->
+                        <!-- <div class="form-group col-md">
                             <div class="row">
                                 <div class="col">
                                     <label for="inputRemarks">Remarks</label>
@@ -186,23 +216,25 @@
                             </div>
                             <textarea rows="3" formControlName="remarks" type="text" class="form-control"
                                 id="inputRemarks"></textarea>
-                        </div>
-                    </div>
+                        </div> -->
+                    <!-- </div> -->
                     <div class="row">
                         <div class="col-3">
-                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2">Save</button>
+                            <button type="submit" [disabled]="applicationForm.invalid"  class="btn bg-olive text-white mb-2 mr-2" (click)="addApplication()">Save</button>
                             <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
                             <button routerLink="/user-address" class="btn bg-olive text-white mb-2 mr-2">Next</button>
                         </div>
 
                         <div class="col">
-                            <div class="form-signin alert alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div class="form-signin alert alert-dismissible fade show" 
+                            [ngClass]="applicationResponseStatus  == 500 ?  'alert-danger ' : applicationResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                            role="alert" *ngIf="applicationFormSubmitted">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
                                     <span aria-hidden="true">&times;</span>
                                     <span class="sr-only">Close</span>
                                 </button>
-
-
+                                <div *ngIf="applicationResponseStatus  == 500;"><strong>Internal Sever Error</strong></div>
+                            <div *ngIf="applicationResponseStatus  != 500;"><strong>{{applicationFormResponseString}}</strong></div>
                             </div>
                         </div>
                     </div>

@@ -282,10 +282,19 @@
                     </p>
                     
                 </form>
+                <!-- address same {{isAddressSame}} <br>
+                temp add invalid : {{(temporaryAddressForm.invalid)}} <br>
+
+                tmep issame and : {{(temporaryAddressForm.invalid && isAddressSame)}} <br>
+                temp issame or : {{(temporaryAddressForm.invalid || isAddressSame)}} <br>
+                permanent invalid : {{permanentAddressForm.invalid}} <br>
+                both invalid and : {{permanentAddressForm.invalid && temporaryAddressForm.invalid}} <br>
+                both invalid or: {{permanentAddressForm.invalid || temporaryAddressForm.invalid}} <br>
+                {{(temporaryAddressForm.invalid && !isAddressSame ) || (permanentAddressForm.invalid && temporaryAddressForm.invalid)}} -->
                 <div class="row">
                     <div class="col-3">
-                        <button [disabled]="(permanentAddressForm.invalid && isAddressSame) || (permanentAddressForm.invalid && permanentAddressForm.invalid)
-                         || isAddressPresent" type="submit" 
+                        <button [disabled]="temporaryAddressForm.invalid" 
+                        type="submit" 
                         class="btn bg-olive text-white mb-2 mr-2" (click)="onSubmit()" *ngIf="!isAddressPresent">Save</button>
                         <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="isAddressPresent"
                                 [disabled]="permanentAddressForm.invalid" (click)="updatePermanentAddress()">Update</button>
