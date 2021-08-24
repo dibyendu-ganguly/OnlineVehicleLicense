@@ -53,6 +53,9 @@ export class AddressComponent implements OnInit {
   ];
 
   isAddressSame = false;
+  isAddressPresent = false;
+
+  applicantPresentAddress: TemporaryAddress = new TemporaryAddress();
 
   temporaryAddressForm !: FormGroup;
   permanentAddressForm !: FormGroup;
@@ -78,6 +81,7 @@ export class AddressComponent implements OnInit {
 
   isLoggedIn: boolean = false;
   userName!: string;
+  role ?: string;
 
   constructor(
     private router : Router,
@@ -96,6 +100,16 @@ export class AddressComponent implements OnInit {
       else if (sessionStorage.getItem('UserName')?.toString() != null) {
         this.userName = sessionStorage.getItem('UserName')!.toString();
       }
+      if (localStorage.getItem('role')?.toString() != null) {
+        this.role = localStorage.getItem('role')?.toString();
+      }
+      else if (sessionStorage.getItem('role')?.toString() != null) {
+        this.role = sessionStorage.getItem('role')?.toString();
+      }
+    }
+
+    if(this.role!='user'){
+      this.router.navigate(['forbidden']);
     }
 
     this.house = new FormControl(null, [Validators.required]);
@@ -132,6 +146,20 @@ export class AddressComponent implements OnInit {
         'isSame': this.isSame,
       }
     );
+
+    this.userService.viewPresentAddress(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantPresentAddress = data;
+        console.log(this.applicantPresentAddress);
+        if(this.applicantPresentAddress!=null){
+          this.isAddressPresent = true;
+        } else{
+          this.isAddressPresent = false;
+        }
+      }
+    );
+
   }
 
   newTempAddr: TemporaryAddress = new TemporaryAddress();

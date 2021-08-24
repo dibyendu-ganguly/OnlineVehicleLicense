@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Address</h1>
         <ul>
-            <li>All the fields except Landmark is required.</li>
+            <li>All the fields except Landmark are required.</li>
             <li>Pincode should be of 6 digits only.</li>
         </ul>
         <p>Submit button will be enabled once all the required fields are corectly entered</p>
@@ -51,7 +51,7 @@
                     
                     <div class="form-row">
                         <!--City-->
-                        <div class="form-group">
+                        <div class="form-group col-3">
                             <div class="row">
                                 <div class="col">
                                     <label for="inputCity">City</label>
@@ -94,8 +94,8 @@
                                 </div>
                              </div>
                           </div>
-                          <input formControlName="city" type="text" class="form-control" 
-                          id="inputCity" placeholder="Maharashtra" value="MAHARASHTRA" 
+                          <input formControlName="state" type="text" class="form-control" 
+                          id="inputState" placeholder="Maharashtra" value="MAHARASHTRA" 
                           oninput="this.value = this.value.toUpperCase()" readonly>
                       </div>
                       <!-- Pincode -->
@@ -261,7 +261,8 @@
                 </form>
                 <div class="row">
                     <div class="col-3">
-                        <button [disabled]="(temporaryAddressForm.invalid && isAddressSame) || (temporaryAddressForm.invalid && permanentAddressForm.invalid)" type="submit" 
+                        <button [disabled]="(temporaryAddressForm.invalid && isAddressSame) || (temporaryAddressForm.invalid && permanentAddressForm.invalid)
+                         || isAddressPresent" type="submit" 
                         class="btn bg-olive text-white mb-2 mr-2" (click)="onSubmit()">Save</button>
                         <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
                         <button routerLink="/user-application" class="btn bg-olive text-white mb-2 mr-2">Next</button>
