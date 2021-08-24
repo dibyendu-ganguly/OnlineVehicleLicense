@@ -6,6 +6,7 @@ import { Applicant } from '../models/applicant.model';
 import { TemporaryAddress } from '../models/temporary-address.model';
 import { Address } from '../models/address.model';
 import { AddressType } from '../models/address-type.enum';
+import { Application } from '../models/application.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,4 +64,8 @@ export class UserService {
     return this.http.put(`${this.baseUrl}`+`/${username}/address/update-address/`+`${addrType}`, permAddr, {responseType: 'text', observe: 'response'});
   }
 
-}
+  addApplication(username: string, application: Application, rtoId: number):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/${username}/application/${rtoId}/createApplication`, application, {responseType: 'text', observe: 'response'});
+  }
+
+ }

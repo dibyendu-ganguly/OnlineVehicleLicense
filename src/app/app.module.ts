@@ -34,6 +34,7 @@ import { RtoOfficerComponent } from './rto-officer/rto-officer.component';
 import { AdminComponent } from './admin/admin.component';
 import { ActRulePoliciesComponent } from './act-rule-policies/act-rule-policies.component';
 import { FaqComponent } from './faq/faq.component';
+import { ViewApplicationComponent } from './view-application/view-application.component';
 
 
 
@@ -66,7 +67,8 @@ import { FaqComponent } from './faq/faq.component';
     RtoOfficerComponent,
     AdminComponent,
     ActRulePoliciesComponent,
-    FaqComponent
+    FaqComponent,
+    ViewApplicationComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

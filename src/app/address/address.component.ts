@@ -118,7 +118,7 @@ export class AddressComponent implements OnInit {
     this.house = new FormControl(null, [Validators.required]);
     this.landmark = new FormControl(null);
     this.city = new FormControl(null, [Validators.required]);
-    this.state = new FormControl({value: "MAHARASHTRA", disabled: true}, [Validators.required]);
+    this.state = new FormControl({value: "MAHARASHTRA", disabled: true});
     this.pincode = new FormControl(null, [Validators.required, Validators.pattern('^[0-9]{6}$')]);
     
     this.isSame = new FormControl(false);
@@ -328,6 +328,8 @@ export class AddressComponent implements OnInit {
   onChange(e : any){
     if(e.target.checked){
       this.isAddressSame = true;
+      this.permanentAddressForm.controls.requiredControl.clearValidators();
+      this.permanentAddressForm.updateValueAndValidity();
     }
     else{
       this.isAddressSame = false;
