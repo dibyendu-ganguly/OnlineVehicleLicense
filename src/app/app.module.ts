@@ -36,6 +36,9 @@ import { ActRulePoliciesComponent } from './act-rule-policies/act-rule-policies.
 import { FaqComponent } from './faq/faq.component';
 import { ViewApplicationComponent } from './view-application/view-application.component';
 import { RtoOfficerDashboardNavbarComponent } from './rto-officer-dashboard-navbar/rto-officer-dashboard-navbar.component';
+import { PermitComponent } from './permit/permit.component';
+import { HyperlinkPolicyComponent } from './hyperlink-policy/hyperlink-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 
@@ -70,7 +73,10 @@ import { RtoOfficerDashboardNavbarComponent } from './rto-officer-dashboard-navb
     ActRulePoliciesComponent,
     FaqComponent,
     ViewApplicationComponent,
-    RtoOfficerDashboardNavbarComponent
+    RtoOfficerDashboardNavbarComponent,
+    PermitComponent,
+    HyperlinkPolicyComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

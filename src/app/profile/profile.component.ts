@@ -203,7 +203,7 @@ export class ProfileComponent implements OnInit {
         let resJSON = JSON.parse(resSTR);
         console.log(resJSON.error)
         console.log(resJSON.status)
-        this.applicantFormResponseString = resJSON.body
+        this.applicantFormResponseString = resJSON.error
         this.applicantResponseStatus = resJSON.status
       }
     );

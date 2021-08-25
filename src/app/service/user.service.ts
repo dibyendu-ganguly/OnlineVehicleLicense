@@ -7,6 +7,7 @@ import { TemporaryAddress } from '../models/temporary-address.model';
 import { Address } from '../models/address.model';
 import { AddressType } from '../models/address-type.enum';
 import { Application } from '../models/application.model';
+import { Appointment } from '../models/appointment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,14 @@ export class UserService {
 
   uploadAddressProof(applicationNumber: string, addressProof: FormData):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/document/${applicationNumber}/upload-addressProof` , addressProof, {responseType: 'text', observe: 'response'});
+  }
+
+  addAppointment(appointment: Appointment ,applicationNumber: string, rtoId : number):Observable<HttpResponse<String>>{
+    let parameters = new HttpParams()
+    .set('applicationNumber', applicationNumber)
+    .set('rtoId', rtoId );
+    console.log(appointment);
+    return this.http.post(`${this.baseUrl}`+`/appointment/create-appointment`,appointment,{responseType: 'text', observe: 'response', params: parameters});
   }
 
  }
