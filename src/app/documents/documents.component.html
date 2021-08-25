@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <input formControlName="photo" type="file" ng2FileSelect accept=".jpg,.jpeg,.png" class="form-control-file"
-                                id="inputPhoto" >
+                                id="inputPhoto" (change)="onPhotoSelected($event)">
                             
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <div class="form-group col-md-4">
                             <div class="row">
                                 <div class="col">
-                                    <label for="inputIdProof">Upload Id Proof(Aadhar/Pan/Voter)</label>
+                                    <label for="inputIdProof">Upload Id Proof</label>
                                 </div>
                                 <div class="col">
                                     <div *ngIf="documentForm.controls['idProof'].invalid && (documentForm.controls['idProof'].dirty || documentForm.controls['idProof'].touched)"
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <input formControlName="idProof" type="file" ng2FileSelect accept=".pdf" class="form-control-file"
-                                id="inputIdProof" >
+                                id="inputIdProof" (change)="onIdSelected($event)">
                             
                         </div>
                     </div>
@@ -134,21 +134,17 @@
                                 </div>
                             </div>
                             <input formControlName="addressProof" type="file" ng2FileSelect accept=".pdf" class="form-control-file"
-                                id="inputaddressProof" >
+                                id="inputaddressProof" (change)="onAddressSelected($event)">
                             
                         </div>
+                        
                     </div>
 
                     
 
                     <div class="row">
                         <div class="col-3">
-                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="!isPresent"
-                                [disabled]="documentForm.invalid" (click)="addDocument()">Save</button>
-                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="isPresent"
-                                [disabled]="documentForm.invalid" (click)="updateDocument()">Update</button>
-                            <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
-                            <button routerLink="/user-documents" class="btn bg-olive text-white mb-2 mr-2">Next</button>
+                            <button routerLink="/user-appointment" class="btn bg-olive text-white mb-2 mr-2">Next</button>
                         </div>
 
                         <div class="col">

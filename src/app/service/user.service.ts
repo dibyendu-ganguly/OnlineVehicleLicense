@@ -68,4 +68,16 @@ export class UserService {
     return this.http.post(`${this.baseUrl}`+`/${username}/application/${rtoId}/createApplication`, application, {responseType: 'text', observe: 'response'});
   }
 
+  uploadPhoto(applicationNumber: string, photo: FormData):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/document/${applicationNumber}/upload-photo` , photo, {responseType: 'text', observe: 'response'});
+  }
+
+  uploadIdProof(applicationNumber: string, idProof: FormData):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/document/${applicationNumber}/upload-idProof` , idProof, {responseType: 'text', observe: 'response'});
+  }
+
+  uploadAddressProof(applicationNumber: string, addressProof: FormData):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/document/${applicationNumber}/upload-addressProof` , addressProof, {responseType: 'text', observe: 'response'});
+  }
+
  }
