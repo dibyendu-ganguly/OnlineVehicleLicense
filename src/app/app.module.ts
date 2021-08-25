@@ -39,6 +39,9 @@ import { RtoOfficerDashboardNavbarComponent } from './rto-officer-dashboard-navb
 import { PermitComponent } from './permit/permit.component';
 import { HyperlinkPolicyComponent } from './hyperlink-policy/hyperlink-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { LicenseComponent } from './license/license.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -76,7 +79,10 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     RtoOfficerDashboardNavbarComponent,
     PermitComponent,
     HyperlinkPolicyComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    LicenseComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

@@ -89,4 +89,11 @@ export class UserService {
     return this.http.post(`${this.baseUrl}`+`/appointment/create-appointment`,appointment,{responseType: 'text', observe: 'response', params: parameters});
   }
 
+  getLLApplication(applicationNumber:string):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}`+`/viewApplication/${applicationNumber}`+'LL');
+  }
+  getDLApplication(applicationNumber:string):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}`+`/viewApplication/${applicationNumber}`+'DL');
+  }
+
  }
