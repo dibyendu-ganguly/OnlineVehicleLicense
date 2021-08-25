@@ -68,8 +68,9 @@ export class ProfileComponent implements OnInit {
     public datePipe : DatePipe
   ) { }
 
-  isLoggedIn: boolean = false;
-  userName!: string;
+  isLoggedIn : boolean = false;
+  userName !: string;
+  role ?: string;
 
   applicant : Applicant = new Applicant();
 
@@ -88,10 +89,18 @@ export class ProfileComponent implements OnInit {
       else if (sessionStorage.getItem('UserName')?.toString() != null) {
         this.userName = sessionStorage.getItem('UserName')!.toString();
       }
+      if (localStorage.getItem('role')?.toString() != null) {
+        this.role = localStorage.getItem('role')?.toString();
+      }
+      else if (sessionStorage.getItem('role')?.toString() != null) {
+        this.role = sessionStorage.getItem('role')?.toString();
+      }
     }
 
+    if(this.role!='user'){
+      this.router.navigate(['forbidden']);
+    }
     
-
     this.userService.viewApplicantProfile(this.userName).subscribe(
       data => {
         console.log(data);
@@ -192,7 +201,7 @@ export class ProfileComponent implements OnInit {
         console.log(error)
         let resSTR = JSON.stringify(error);
         let resJSON = JSON.parse(resSTR);
-        console.log(resJSON.body)
+        console.log(resJSON.error)
         console.log(resJSON.status)
         this.applicantFormResponseString = resJSON.body
         this.applicantResponseStatus = resJSON.status

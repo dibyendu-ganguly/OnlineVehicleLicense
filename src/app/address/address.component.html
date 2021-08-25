@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Address</h1>
         <ul>
-            <li>All the fields except Landmark is required.</li>
+            <li>All the fields except Landmark are required.</li>
             <li>Pincode should be of 6 digits only.</li>
         </ul>
         <p>Submit button will be enabled once all the required fields are corectly entered</p>
@@ -51,7 +51,7 @@
                     
                     <div class="form-row">
                         <!--City-->
-                        <div class="form-group">
+                        <div class="form-group col-3">
                             <div class="row">
                                 <div class="col">
                                     <label for="inputCity">City</label>
@@ -94,8 +94,8 @@
                                 </div>
                              </div>
                           </div>
-                          <input formControlName="city" type="text" class="form-control" 
-                          id="inputCity" placeholder="Maharashtra" value="MAHARASHTRA" 
+                          <input formControlName="state" type="text" class="form-control" 
+                          id="inputState" placeholder="Maharashtra" value="MAHARASHTRA" 
                           oninput="this.value = this.value.toUpperCase()" readonly>
                       </div>
                       <!-- Pincode -->
@@ -124,6 +124,29 @@
                           </div>
                           <input formControlName="pincode" type="text" class="form-control" id="inputPincode"  placeholder="893274">
                       </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="isAddressPresent"
+                                [disabled]="temporaryAddressForm.invalid" (click)="updateTemporaryAddress()">Update</button>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-signin alert alert-dismissible fade show"
+                                [ngClass]="addressResponseStatus  == 500 ?  'alert-danger ' : addressResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                                role="alert" *ngIf="temporaryAddressFormSubmitted">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                                    (click)="addressFormSubmitted=false;">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <div *ngIf="addressResponseStatus  == 500;"><strong>Internal Sever Error</strong>
+                                </div>
+                                <div *ngIf="addressResponseStatus  != 500;">
+                                    <strong>{{addressFormResponseString}}</strong></div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -259,10 +282,22 @@
                     </p>
                     
                 </form>
+                <!-- address same {{isAddressSame}} <br>
+                temp add invalid : {{(temporaryAddressForm.invalid)}} <br>
+
+                tmep issame and : {{(temporaryAddressForm.invalid && isAddressSame)}} <br>
+                temp issame or : {{(temporaryAddressForm.invalid || isAddressSame)}} <br>
+                permanent invalid : {{permanentAddressForm.invalid}} <br>
+                both invalid and : {{permanentAddressForm.invalid && temporaryAddressForm.invalid}} <br>
+                both invalid or: {{permanentAddressForm.invalid || temporaryAddressForm.invalid}} <br>
+                {{(temporaryAddressForm.invalid && !isAddressSame ) || (permanentAddressForm.invalid && temporaryAddressForm.invalid)}} -->
                 <div class="row">
                     <div class="col-3">
-                        <button [disabled]="(temporaryAddressForm.invalid && isAddressSame) || (temporaryAddressForm.invalid && permanentAddressForm.invalid)" type="submit" 
-                        class="btn bg-olive text-white mb-2 mr-2" (click)="onSubmit()">Save</button>
+                        <button [disabled]="temporaryAddressForm.invalid" 
+                        type="submit" 
+                        class="btn bg-olive text-white mb-2 mr-2" (click)="onSubmit()" *ngIf="!isAddressPresent">Save</button>
+                        <button type="submit" class="btn bg-olive text-white mb-2 mr-2" *ngIf="isAddressPresent"
+                                [disabled]="permanentAddressForm.invalid" (click)="updatePermanentAddress()">Update</button>
                         <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
                         <button routerLink="/user-application" class="btn bg-olive text-white mb-2 mr-2">Next</button>
                     </div>
@@ -270,8 +305,8 @@
                     <div class="col">
                         <div class="form-signin alert alert-dismissible fade show"
                             [ngClass]="addressResponseStatus  == 500 ?  'alert-danger ' : addressResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
-                            role="alert" *ngIf="addressFormSubmitted">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="addressFormSubmitted=false">
+                            role="alert" *ngIf="permanentAddressFormSubmitted">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="permanentAddressFormSubmitted=false">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>

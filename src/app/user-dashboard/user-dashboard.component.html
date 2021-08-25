@@ -21,95 +21,197 @@
 
     <div class="container-fluid">
         <h1 class="my-4">Dashboard</h1>
-        
+
     </div>
 
     <div class="container-fluid  mb-4">
         <div class="accordion" id="accordionExample">
             <!--Profile info-->
-                <div class="card">
-                    <h4 class="card-header bg-olive-dark text-white" id="headingOne">
-                        <div class="row">
-                            <div class="col">Profile</div>
-                            <div class="col text-right">
-                                <button class="btn btn-light text-left" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                    aria-expanded="true" aria-controls="collapseOne">
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                            </div>
+            <div class="card">
+                <h4 class="card-header bg-olive-dark text-white" id="headingOne">
+                    <div class="row">
+                        <div class="col">Profile</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
                         </div>
-                    </h4>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ng-container *ngIf="isApplicantPresent; then thenTemplate; else elseTemplate"></ng-container>
-                            <ng-template #thenTemplate>
-                                <div class="datatable table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First Name</th>
-                                                <th scope="col">Middle Name</th>
-                                                <th scope="col">Last Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                                  </svg>
-                                                </th>
-                                                <td>{{this.applicant.firstName}}</td>
-                                                <td>{{this.applicant.middleName}}</td>
-                                                <td>{{this.applicant.lastName}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                    </div>
+                </h4>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <ng-container *ngIf="isApplicantPresent; then thenTemplate; else elseTemplate"></ng-container>
+                        <ng-template #thenTemplate>
+                            <div class="datatable table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Middle Name</th>
+                                            <th scope="col">Last Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                                </svg>
+                                            </th>
+                                            <td>{{this.applicant.firstName}}</td>
+                                            <td>{{this.applicant.middleName}}</td>
+                                            <td>{{this.applicant.lastName}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="datatable table-responsive">
+
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Date of Birth</th>
+                                            <th>Place of Birth</th>
+                                            <th>Gender</th>
+                                            <th>Qualification</th>
+                                            <th>Mobile</th>
+                                            <th>Nationality</th>
+                                            <th>Vehicle Number</th>
+                                            <th>Vehicle Type</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{this.applicant.dateOfBirth}}</td>
+                                            <td>{{this.applicant.placeOfBirth}}
+                                            </td>
+                                            <td>{{this.applicant.gender}}</td>
+                                            <td>{{this.applicant.qualification}}</td>
+                                            <td>{{this.applicant.mobile}}</td>
+                                            <td>
+                                                <div class="badge badge-success">{{this.applicant.nationality}}
+                                                </div>
+                                            </td>
+                                            <td>{{this.applicant.vehicleNumber}}</td>
+                                            <td>{{this.applicant.vehicleType}}</td>
+                                            <td>
+                                                <button class="btn btn-blue btn-icon" routerLink="/user-profile"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-pencil-square"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                    </svg></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-template>
+                        <ng-template #elseTemplate>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="display-5">Profile not added</h5>
                                 </div>
-                                <div class="datatable table-responsive">
-                                    
-                                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Date of Birth</th>
-                                                <th>Place of Birth</th>
-                                                <th>Gender</th>
-                                                <th>Qualification</th>
-                                                <th>Mobile</th>
-                                                <th>Nationality</th>
-                                                <th>Vehicle Number</th>
-                                                <th>Vehicle Type</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>{{this.applicant.dateOfBirth}}</td>
-                                                <td>{{this.applicant.placeOfBirth}}
-                                                </td>
-                                                <td>{{this.applicant.gender}}</td>
-                                                <td>{{this.applicant.qualification}}</td>
-                                                <td>{{this.applicant.mobile}}</td>
-                                                <td>
-                                                    <div class="badge badge-success">{{this.applicant.nationality}}
-                                                    </div>
-                                                </td>
-                                                <td>{{this.applicant.vehicleNumber}}</td>
-                                                <td>{{this.applicant.vehicleType}}</td>
-                                                <td>
-                                                    <button class="btn btn-blue btn-icon" routerLink="/user-profile"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                                      </svg></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col text-right">
+                                    <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
                                 </div>
-                            </ng-template>
-                            <ng-template #elseTemplate>
+                            </div>
+
+
+                        </ng-template>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Address info-->
+            <div class="card">
+                <h4 class="card-header bg-olive-light text-white" id="headingTwo">
+                    <div class="row">
+                        <div class="col">Address</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <ng-container *ngIf="isAddressPresent; then thenTemplate2; else elseTemplate3"></ng-container>
+                        <ng-template #thenTemplate2>
+                            <!--Present Address View-->
+                            <p class="display-5">Present Address</p>
+                            <div class="datatable table-responsive">
+
+                                <table class="table table-bordered table-hover" id="dataTable2" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>House</th>
+                                            <th>Landmark</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Pincode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{this.applicantPresentAddress.house}}</td>
+                                            <td>{{this.applicantPresentAddress.landmark}}</td>
+                                            <td>{{this.applicantPresentAddress.city}}</td>
+                                            <td>{{this.applicantPresentAddress.state}}</td>
+                                            <td>{{this.applicantPresentAddress.pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--Permanent Address View-->
+                            <p class="display-5">Permanent Address</p>
+                            <div class="datatable table-responsive">
+
+                                <table class="table table-bordered table-hover" id="dataTable3" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>House</th>
+                                            <th>Landmark</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Pincode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{this.applicantPermanentAddress.house}}</td>
+                                            <td>{{this.applicantPermanentAddress.landmark}}</td>
+                                            <td>{{this.applicantPermanentAddress.city}}</td>
+                                            <td>{{this.applicantPermanentAddress.state}}</td>
+                                            <td>{{this.applicantPermanentAddress.pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-dark" routerLink="/user-address">Edit <i class="bi bi-pencil-square"></i></button>
+                        </ng-template>
+                        <ng-template #elseTemplate3>
+                            <ng-container *ngIf="!isApplicantPresent; else elseTemplate4">
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="display-5">Profile not added</h5>
@@ -118,42 +220,23 @@
                                         <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
                                     </div>
                                 </div>
-                                
-                                
+                            </ng-container>
+                            <ng-template #elseTemplate4>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">Address not added</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-address">Add Address</button>
+                                    </div>
+                                </div>
                             </ng-template>
-                            
-
-                            
-                        </div>
-                    </div>
-                </div>
-            
-            
-            <!--Address info-->
-            <div class="card">
-                <h4 class="card-header bg-olive-light text-white" id="headingTwo">
-                    <div class="row">
-                        <div class="col">Address</div>
-                        <div class="col text-right">
-                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="bi bi-chevron-down"></i>
-                            </button>
-                        </div>
-                    </div>
-                </h4>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
+                        </ng-template>
                     </div>
                 </div>
             </div>
+
+
             <!--Application info-->
             <div class="card">
                 <h4 class="card-header bg-olive-dark text-white" id="headingThree">
@@ -179,6 +262,8 @@
                     </div>
                 </div>
             </div>
+
+
             <!--Appointment info-->
             <div class="card">
                 <h4 class="card-header bg-olive-light text-white" id="headingFour">
@@ -204,6 +289,8 @@
                     </div>
                 </div>
             </div>
+
+
             <!--License info-->
             <div class="card">
                 <h4 class="card-header bg-olive-dark text-white" id="headingFive">
@@ -236,4 +323,3 @@
 
 <!-- </div> -->
 <!-- /#wrapper -->
-

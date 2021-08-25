@@ -16,6 +16,7 @@ import { AddressComponent } from './address/address.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes : Routes = [
   {
@@ -69,6 +70,10 @@ const routes : Routes = [
   {
     path : 'admin',
     component : AdminComponent
+  },
+  {
+    path : 'FAQ',
+    component : FaqComponent
   },
   {
     path: 'forbidden',

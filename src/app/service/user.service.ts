@@ -5,7 +5,11 @@ import { Users } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { TemporaryAddress } from '../models/temporary-address.model';
 import { Address } from '../models/address.model';
+<<<<<<< HEAD
 import { Documents } from '../models/document.model';
+=======
+import { AddressType } from '../models/address-type.enum';
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
 import { Application } from '../models/application.model';
 
 @Injectable({
@@ -40,8 +44,6 @@ export class UserService {
     return this.http.put(`${this.baseUrl}`+`/${username}/update-applicant-profile`,applicant,{responseType: 'text', observe: 'response'});
   }
 
-
-  
   addTemporaryAddress(username:string, tempAddr: TemporaryAddress, isSame: boolean):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/${username}/address/add-temporary-address/${isSame}`, tempAddr, {responseType: 'text', observe: 'response'});
   }
@@ -50,6 +52,7 @@ export class UserService {
     return this.http.post(`${this.baseUrl}`+`/${username}/address/add-address`, addr, {responseType: 'text', observe: 'response'});
   }
 
+<<<<<<< HEAD
   addDocumentApplication(applicationNumber:string,doc:Documents):Observable<HttpResponse<String>>{
     this.http.post(`${this.baseUrl}`+`/documents/${applicationNumber}/upload-photo`, doc.photo, {responseType: 'text', observe: 'response'});
     this.http.post(`${this.baseUrl}`+`/documents/${applicationNumber}/upload-idProof`, doc.idProof, {responseType: 'text', observe: 'response'});
@@ -61,3 +64,26 @@ export class UserService {
   }
 
 }
+=======
+  viewPresentAddress(username:string):Observable<TemporaryAddress> {
+    return this.http.get<TemporaryAddress>(`${this.baseUrl}`+`/${username}/address/view-present-address`);
+  }
+
+  viewPermanentAddress(username:string):Observable<Address> {
+    return this.http.get<Address>(`${this.baseUrl}`+`/${username}/address/view-permanent-address`);
+  }
+
+  updateTemporaryAddress(username:string, tempAddr: TemporaryAddress, addrType: AddressType):Observable<HttpResponse<String>>{
+    return this.http.put(`${this.baseUrl}`+`/${username}/address/update-address/`+`${addrType}`, tempAddr, {responseType: 'text', observe: 'response'});
+  }
+
+  updatePermanentAddress(username:string, permAddr: Address, addrType: AddressType):Observable<HttpResponse<String>>{
+    return this.http.put(`${this.baseUrl}`+`/${username}/address/update-address/`+`${addrType}`, permAddr, {responseType: 'text', observe: 'response'});
+  }
+
+  addApplication(username: string, application: Application, rtoId: number):Observable<HttpResponse<String>>{
+    return this.http.post(`${this.baseUrl}`+`/${username}/application/${rtoId}/createApplication`, application, {responseType: 'text', observe: 'response'});
+  }
+
+ }
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595

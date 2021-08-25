@@ -32,6 +32,9 @@ import { DatePipe } from '@angular/common';
 import { RtoOfficeComponent } from './rto-office/rto-office.component';
 import { RtoOfficerComponent } from './rto-officer/rto-officer.component';
 import { AdminComponent } from './admin/admin.component';
+import { ActRulePoliciesComponent } from './act-rule-policies/act-rule-policies.component';
+import { FaqComponent } from './faq/faq.component';
+import { ViewApplicationComponent } from './view-application/view-application.component';
 
 
 
@@ -62,7 +65,10 @@ import { AdminComponent } from './admin/admin.component';
     AppointmentComponent,
     RtoOfficeComponent,
     RtoOfficerComponent,
-    AdminComponent
+    AdminComponent,
+    ActRulePoliciesComponent,
+    FaqComponent,
+    ViewApplicationComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

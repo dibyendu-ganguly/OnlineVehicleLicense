@@ -19,8 +19,45 @@
                 <form [formGroup]="documentForm">
 
                     <div class="form-row">
+<<<<<<< HEAD
                         <!--Photo-->
                         <div class="form-group col-md">
+=======
+                        <!--License Type-->
+                        <div class="form-group col-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputapplicationType">License Type</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="documentForm.controls['applicationType'].invalid && (documentForm.controls['applicationType'].dirty || documentForm.controls['applicationType'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="applicationType.errors?.required">License type is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="documentForm.controls['applicationType'].valid && (documentForm.controls['applicationType'].dirty || documentForm.controls['applicationType'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <select formControlName="applicationType" class="form-control custom-select mr-sm-2"
+                                id="inputapplicationType">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let enum of applicationTypeList | keyvalue" value="{{enum.value}}">
+                                    {{ enum.value}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <!--Photo-->
+                        <div class="form-group col-md-4">
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                             <div class="row">
                                 <div class="col">
                                     <label for="inputPhoto">Upload Photo</label>
@@ -33,7 +70,11 @@
                                                 required.</strong>
                                         </small>
                                     </div>
+<<<<<<< HEAD
                                     <div *ngIf="documentForm.controls['photo'].invalid && (documentForm.controls['photo'].dirty || documentForm.controls['photo'].touched)"
+=======
+                                    <div *ngIf="documentForm.controls['photo'].valid && (documentForm.controls['photo'].dirty || documentForm.controls['photo'].touched)"
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                                         class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -49,7 +90,11 @@
 
                     <div class="form-row">
                         <!--Id Proof-->
+<<<<<<< HEAD
                         <div class="form-group col-md">
+=======
+                        <div class="form-group col-md-4">
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                             <div class="row">
                                 <div class="col">
                                     <label for="inputIdProof">Upload Id Proof(Aadhar/Pan/Voter)</label>
@@ -62,7 +107,11 @@
                                                 required.</strong>
                                         </small>
                                     </div>
+<<<<<<< HEAD
                                     <div *ngIf="documentForm.controls['idProof'].invalid && (documentForm.controls['idProof'].dirty || documentForm.controls['idProof'].touched)"
+=======
+                                    <div *ngIf="documentForm.controls['idProof'].valid && (documentForm.controls['idProof'].dirty || documentForm.controls['idProof'].touched)"
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                                         class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -70,7 +119,11 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <input formControlName="idProof" type="file" ng2FileSelect accept=".pdf,.doc" class="form-control-file"
+=======
+                            <input formControlName="idProof" type="file" ng2FileSelect accept=".pdf" class="form-control-file"
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                                 id="inputIdProof" >
                             
                         </div>
@@ -80,7 +133,11 @@
 
                     <div class="form-row">
                         <!--Address Proof-->
+<<<<<<< HEAD
                         <div class="form-group col-md">
+=======
+                        <div class="form-group col-md-4">
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                             <div class="row">
                                 <div class="col">
                                     <label for="inputaddressProof">Upload Address Proof</label>
@@ -93,7 +150,11 @@
                                                 required.</strong>
                                         </small>
                                     </div>
+<<<<<<< HEAD
                                     <div *ngIf="documentForm.controls['addressProof'].invalid && (documentForm.controls['addressProof'].dirty || documentForm.controls['addressProof'].touched)"
+=======
+                                    <div *ngIf="documentForm.controls['addressProof'].valid && (documentForm.controls['addressProof'].dirty || documentForm.controls['addressProof'].touched)"
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                                         class="text-success text-right">
                                         <small>
                                             <strong><i class="bi bi-check-lg"></i></strong>
@@ -101,7 +162,11 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <input formControlName="addressProof" type="file" ng2FileSelect accept=".pdf,.doc" class="form-control-file"
+=======
+                            <input formControlName="addressProof" type="file" ng2FileSelect accept=".pdf" class="form-control-file"
+>>>>>>> 5ced0f0e5a732b288b50e72bc631aeb34c7de595
                                 id="inputaddressProof" >
                             
                         </div>

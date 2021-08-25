@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Address } from '../models/address.model';
 import { Applicant } from '../models/applicant.model';
+import { TemporaryAddress } from '../models/temporary-address.model';
 import { UserService } from '../service/user.service';
 
 @Component({
@@ -18,8 +20,11 @@ export class UserDashboardComponent implements OnInit {
   val = localStorage.getItem('UserName');
 
   applicant : Applicant = new Applicant();
+  applicantPresentAddress: TemporaryAddress = new TemporaryAddress();
+  applicantPermanentAddress: Address = new Address();
 
   isApplicantPresent = false;
+  isAddressPresent = false;
 
   isLoggedIn: boolean = false;
   userName?: string;
@@ -77,7 +82,27 @@ export class UserDashboardComponent implements OnInit {
         } else{
           this.isApplicantPresent = false;
         }
-        
+      }
+    );
+
+    this.userService.viewPresentAddress(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantPresentAddress = data;
+        console.log(this.applicantPresentAddress);
+        if(this.applicantPresentAddress!=null){
+          this.isAddressPresent = true;
+        } else{
+          this.isAddressPresent = false;
+        }
+      }
+    );
+
+    this.userService.viewPermanentAddress(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantPermanentAddress = data;
+        console.log(this.applicantPermanentAddress);
       }
     );
 
