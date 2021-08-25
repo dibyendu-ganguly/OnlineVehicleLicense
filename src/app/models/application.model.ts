@@ -4,6 +4,7 @@ import { LicenseType } from "./license-type.enum";
 
 export class Application {
 
+    applicationNumber : string = "";
     applicationDate : Date = new Date();
     modeOfPayment : string = "";
     amountPaid : number = 0.00;

@@ -14,7 +14,7 @@
             <div class="card">
                 <h4 class="card-header bg-olive-dark text-white" id="headingThree">
                     <div class="row">
-                        <div class="col">Application</div>
+                        <div class="col">Applications</div>
                         <div class="col text-right">
                             <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -25,9 +25,38 @@
                 </h4>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        <p class="display-5">No Applications yet</p>
+                        <ng-container *ngIf="isApplicationPresent; then thenTemplate; else elseTemplate"></ng-container>
+                        <ng-template #thenTemplate>
+                            <div class="datatable table-responsive">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Application No</th>
+                                            <th>Application Date</th>
+                                            <th>Application Type</th>
+                                            <th>Payment Status</th>
+                                            <th>Application Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let appl of application">
+                                            <td>{{appl.applicationNumber}}</td>
+                                            <td>{{appl.applicationDate}}
+                                            </td>
+                                            <td>{{appl.applicationType}}</td>
+                                            <td>{{appl.paymentStatus}}</td>
+                                            <td>{{appl.applicationStatus}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-template>
+                        <ng-template #elseTemplate>
+                            <h5 class="display-5">No Applications Found</h5>
+                        </ng-template>
                     </div>
-                </div>
+                </div> 
             </div>
 
 
@@ -46,7 +75,36 @@
                 </h4>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                     <div class="card-body">
-                        <p class="display-5">No Appointments yet</p>
+                        <ng-container *ngIf="isAppointmentPresent; then thenTemplate2; else elseTemplate2"></ng-container>
+                        <ng-template #thenTemplate2>
+                            <div class="datatable table-responsive">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Application No</th>
+                                            <th>Appointment No</th>
+                                            <th>Test Date</th>
+                                            <th>Time Slot</th>
+                                            <th>Test Result</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let appnt of appointment">
+                                            <td>{{appnt.application.applicationNumber}</td>
+                                            <td>{{appnt.appointmentNumber}}
+                                            </td>
+                                            <td>{{appnt.testDate}}</td>
+                                            <td>{{appnt.timeSlot}}</td>
+                                            <td>{{appnt.testResult}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-template>
+                        <ng-template #elseTemplate2>
+                            <h5 class="display-5">No Appointments Found</h5>
+                        </ng-template>
                     </div>
                 </div>
             </div>
