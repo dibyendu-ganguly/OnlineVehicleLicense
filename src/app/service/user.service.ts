@@ -5,6 +5,8 @@ import { Users } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { TemporaryAddress } from '../models/temporary-address.model';
 import { Address } from '../models/address.model';
+import { Documents } from '../models/document.model';
+import { Application } from '../models/application.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +48,16 @@ export class UserService {
 
   addPermanentAddress(username:string, addr: Address):Observable<HttpResponse<String>>{
     return this.http.post(`${this.baseUrl}`+`/${username}/address/add-address`, addr, {responseType: 'text', observe: 'response'});
+  }
+
+  addDocumentApplication(applicationNumber:string,doc:Documents):Observable<HttpResponse<String>>{
+    this.http.post(`${this.baseUrl}`+`/documents/${applicationNumber}/upload-photo`, doc.photo, {responseType: 'text', observe: 'response'});
+    this.http.post(`${this.baseUrl}`+`/documents/${applicationNumber}/upload-idProof`, doc.idProof, {responseType: 'text', observe: 'response'});
+    return this.http.post(`${this.baseUrl}`+`/documents/${applicationNumber}/upload-addressProof`, doc.addressProof, {responseType: 'text', observe: 'response'});
+  }
+
+  viewApplication(userName:string):Observable<Application>{
+    return this.http.get<Application>(`${this.baseUrl}`+`/${userName}/view-applicant-profile`);
   }
 
 }
