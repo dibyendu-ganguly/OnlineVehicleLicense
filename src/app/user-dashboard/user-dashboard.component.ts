@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Address } from '../models/address.model';
 import { Applicant } from '../models/applicant.model';
+import { Application } from '../models/application.model';
 import { TemporaryAddress } from '../models/temporary-address.model';
 import { UserService } from '../service/user.service';
 
@@ -22,9 +23,13 @@ export class UserDashboardComponent implements OnInit {
   applicant : Applicant = new Applicant();
   applicantPresentAddress: TemporaryAddress = new TemporaryAddress();
   applicantPermanentAddress: Address = new Address();
+  applicantLLApplication : Application = new Application();
+  applicantDLApplication : Application = new Application();
 
   isApplicantPresent = false;
   isAddressPresent = false;
+  isLLPresent = false;
+  isDLPresent = false;
 
   isLoggedIn: boolean = false;
   userName?: string;
@@ -105,6 +110,39 @@ export class UserDashboardComponent implements OnInit {
         console.log(this.applicantPermanentAddress);
       }
     );
+
+    this.userService.getLLApplication(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantLLApplication = data;
+        console.log(this.applicantLLApplication);
+        if(this.applicantLLApplication!=null){
+          this.isLLPresent = true;
+        } else {
+          this.isLLPresent = false;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+    this.userService.getDLApplication(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantDLApplication = data;
+        console.log(this.applicantDLApplication);
+        if(this.applicantDLApplication!=null){
+          this.isDLPresent = true;
+        } else {
+          this.isDLPresent = false;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
 
     
 

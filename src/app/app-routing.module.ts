@@ -22,6 +22,7 @@ import { ViewApplicationComponent } from './view-application/view-application.co
 import { PermitComponent } from './permit/permit.component';
 import { HyperlinkPolicyComponent } from './hyperlink-policy/hyperlink-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { LicenseComponent } from './license/license.component';
 
 const routes : Routes = [
   {
@@ -55,6 +56,10 @@ const routes : Routes = [
   {
     path : 'user-documents',
     component : DocumentsComponent
+  },
+  {
+    path : 'user-license',
+    component : LicenseComponent
   },
   {
     path : 'user-signup',

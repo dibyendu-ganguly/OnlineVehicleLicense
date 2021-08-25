@@ -151,8 +151,7 @@
                         </div>
                     </div>
                 </h4>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne"
-                    data-parent="#accordionExample">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                         <ng-container *ngIf="isAddressPresent; then thenTemplate2; else elseTemplate3"></ng-container>
                         <ng-template #thenTemplate2>
@@ -208,7 +207,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-dark" routerLink="/user-address">Edit <i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-dark" routerLink="/user-address">Edit <i
+                                    class="bi bi-pencil-square"></i></button>
                         </ng-template>
                         <ng-template #elseTemplate3>
                             <ng-container *ngIf="!isApplicantPresent; else elseTemplate4">
@@ -252,64 +252,40 @@
                 </h4>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        <ng-container *ngIf="isAddressPresent; then thenTemplate2; else elseTemplate3"></ng-container>
-                        <ng-template #thenTemplate2>
+                        <ng-container *ngIf="isLLPresent; then thenTemplateLL; else elseTemplateLL"></ng-container>
+                        <ng-template #thenTemplateLL>
                             <!--Present Address View-->
-                            <p class="display-5">Present Address</p>
+                            <p class="display-5">Learner's License</p>
                             <div class="datatable table-responsive">
 
                                 <table class="table table-bordered table-hover" id="dataTable2" width="100%"
                                     cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>House</th>
-                                            <th>Landmark</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>Pincode</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{this.applicantPresentAddress.house}}</td>
-                                            <td>{{this.applicantPresentAddress.landmark}}</td>
-                                            <td>{{this.applicantPresentAddress.city}}</td>
-                                            <td>{{this.applicantPresentAddress.state}}</td>
-                                            <td>{{this.applicantPresentAddress.pincode}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--Permanent Address View-->
-                            <p class="display-5">Permanent Address</p>
-                            <div class="datatable table-responsive">
+                                            <th>Application Type</th>
+                                            <th>Application Date</th>
+                                            <th>Mode of Payment</th>
+                                            <th>Amount Paid</th>
+                                            <th>Remarks</th>
 
-                                <table class="table table-bordered table-hover" id="dataTable3" width="100%"
-                                    cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>House</th>
-                                            <th>Landmark</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>Pincode</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{this.applicantPermanentAddress.house}}</td>
-                                            <td>{{this.applicantPermanentAddress.landmark}}</td>
-                                            <td>{{this.applicantPermanentAddress.city}}</td>
-                                            <td>{{this.applicantPermanentAddress.state}}</td>
-                                            <td>{{this.applicantPermanentAddress.pincode}}</td>
+                                            <td>{{this.applicantLLApplication.applicationType}}</td>
+                                            <td>{{this.applicantLLApplication.applicationDate}}</td>
+                                            <td>{{this.applicantLLApplication.modeOfPayment}}</td>
+                                            <td>{{this.applicantLLApplication.amountPaid}}</td>
+                                            <td>{{this.applicantLLApplication.remarks}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-dark" routerLink="/user-address">Edit <i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-dark" routerLink="/user-application">Edit <i
+                                    class="bi bi-pencil-square"></i></button>
                         </ng-template>
-                        <ng-template #elseTemplate3>
-                            <ng-container *ngIf="!isApplicantPresent; else elseTemplate4">
+                        <ng-template #elseTemplateLL>
+                            <ng-container *ngIf="!isApplicantPresent; else elseTemplateLL1">
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="display-5">Profile not added</h5>
@@ -319,17 +295,73 @@
                                     </div>
                                 </div>
                             </ng-container>
-                            <ng-template #elseTemplate4>
+                            <ng-template #elseTemplateLL1>
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="display-5">Address not added</h5>
+                                        <h5 class="display-5">No Lerner's License application present</h5>
                                     </div>
                                     <div class="col text-right">
-                                        <button class="btn btn-info" routerLink="/user-address">Add Address</button>
+                                        <button class="btn btn-info" routerLink="/user-address">Add Application</button>
                                     </div>
                                 </div>
                             </ng-template>
                         </ng-template>
+
+                        <div class="card-body">
+                            <ng-container *ngIf="isDLPresent; then thenTemplateDL; else elseTemplateDL"></ng-container>
+                            <ng-template #thenTemplateDL>
+                                <!--Present Address View-->
+                                <p class="display-5">Drivers's License</p>
+                                <div class="datatable table-responsive">
+    
+                                    <table class="table table-bordered table-hover" id="dataTable2" width="100%"
+                                        cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Application Type</th>
+                                                <th>Application Date</th>
+                                                <th>Mode of Payment</th>
+                                                <th>Amount Paid</th>
+                                                <th>Remarks</th>
+    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{this.applicantDLApplication.applicationType}}</td>
+                                                <td>{{this.applicantDLApplication.applicationDate}}</td>
+                                                <td>{{this.applicantDLApplication.modeOfPayment}}</td>
+                                                <td>{{this.applicantDLApplication.amountPaid}}</td>
+                                                <td>{{this.applicantDLApplication.remarks}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-dark" routerLink="/user-application">Edit <i
+                                        class="bi bi-pencil-square"></i></button>
+                            </ng-template>
+                            <ng-template #elseTemplateDL>
+                                <ng-container *ngIf="!isApplicantPresent; else elseTemplateDL1">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="display-5">Profile not added</h5>
+                                        </div>
+                                        <div class="col text-right">
+                                            <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-template #elseTemplateDL1>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="display-5">No Drivers's License application present</h5>
+                                        </div>
+                                        <div class="col text-right">
+                                            <button class="btn btn-info" routerLink="/user-application">Add Application</button>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ng-template>
                     </div>
                 </div>
             </div>

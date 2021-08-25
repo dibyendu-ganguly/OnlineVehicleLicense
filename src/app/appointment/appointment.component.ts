@@ -48,7 +48,11 @@ export class AppointmentComponent implements OnInit {
 
   applicant : Applicant = new Applicant();
 
+  today = new Date().toLocaleDateString();
+
   ngOnInit(): void {
+
+    console.log(this.today);
 
     if (localStorage.getItem('UserName') == null && sessionStorage.getItem('UserName') == null) {
       this.router.navigate(['forbidden']);
