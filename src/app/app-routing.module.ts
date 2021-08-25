@@ -19,6 +19,9 @@ import { AdminComponent } from './admin/admin.component';
 import { FaqComponent } from './faq/faq.component';
 import { RtoOfficerComponent } from './rto-officer/rto-officer.component';
 import { ViewApplicationComponent } from './view-application/view-application.component';
+import { PermitComponent } from './permit/permit.component';
+import { HyperlinkPolicyComponent } from './hyperlink-policy/hyperlink-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes : Routes = [
   {
@@ -76,6 +79,18 @@ const routes : Routes = [
   {
     path : 'rto-officer',
     component : RtoOfficerComponent
+  },
+  {
+    path : 'permit',
+    component : PermitComponent
+  },
+  {
+    path : 'privacy-policy',
+    component : PrivacyPolicyComponent
+  },
+  {
+    path : 'hyperlink-policy',
+    component : HyperlinkPolicyComponent
   },
   {
     path : 'view-applications',
