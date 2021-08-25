@@ -1,7 +1,7 @@
 <!-- Page Content -->
 <div id="page-content-wrapper">
 
-    <app-rto-officer-dashboard-navbar></app-rto-officer-dashboard-navbar>
+    <!-- <app-rto-officer-dashboard-navbar></app-rto-officer-dashboard-navbar> -->
 
     <div class="container-fluid">
         <h1 class="my-4">Dashboard</h1>
@@ -82,7 +82,6 @@
                                     cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Application No</th>
                                             <th>Appointment No</th>
                                             <th>Test Date</th>
                                             <th>Time Slot</th>
@@ -91,7 +90,6 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let appnt of appointment">
-                                            <td>{{appnt.application.applicationNumber}</td>
                                             <td>{{appnt.appointmentNumber}}
                                             </td>
                                             <td>{{appnt.testDate}}</td>
