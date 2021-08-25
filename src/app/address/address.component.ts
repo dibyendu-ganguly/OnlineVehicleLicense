@@ -123,11 +123,11 @@ export class AddressComponent implements OnInit {
     
     this.isSame = new FormControl(false);
 
-    this.permanentHouse = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required]);
-    this.permanentLandmark = new FormControl({value: null, disabled: this.isAddressSame});
-    this.permanentCity = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required]);
-    this.permanentState = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required]);
-    this.permanentPincode = new FormControl({value: null, disabled: this.isAddressSame}, [Validators.required, Validators.pattern('^[0-9]{6}$')]);
+    this.permanentHouse = new FormControl(null, [Validators.required]);
+    this.permanentLandmark = new FormControl(null);
+    this.permanentCity = new FormControl(null, [Validators.required]);
+    this.permanentState = new FormControl(null, [Validators.required]);
+    this.permanentPincode = new FormControl(null, [Validators.required, Validators.pattern('^[0-9]{6}$')]);
 
     this.temporaryAddressForm = new FormGroup(
       {
@@ -203,7 +203,10 @@ export class AddressComponent implements OnInit {
     );
 
     this.temporaryAddressForm.reset();
-    this.permanentAddressForm.reset();
+    if(this.isAddressSame) {
+      this.permanentAddressForm.reset();
+      window.location.reload();
+    }
   }
 
   addPermanentAddress(){
@@ -240,6 +243,8 @@ export class AddressComponent implements OnInit {
           this.addressResponseStatus = resJSON.status
         }
       );
+      this.permanentAddressForm.reset();
+      window.location.reload();
   }
 
   updateTemporaryAddress(){
