@@ -155,7 +155,8 @@ export class AdminComponent implements OnInit {
         console.log(this.responseString)
 
         this.rtoFormSubmitted = true;
-        this.rtoForm.reset();       
+        this.rtoForm.reset(); 
+        window.location.reload();      
       },
       error => {
         console.log(error)
@@ -180,6 +181,34 @@ export class AdminComponent implements OnInit {
     this.newRTOofficer.password = this.regForm.controls['password'].value;
     console.log(this.newRTOofficer);
     //this.adminService.......to be added
+    this.rtoOfficerService.addRtoOfficer(this.regForm.controls['rtoOfficeVal'].value, this.newRTOofficer).subscribe(
+      data => {
+        let resSTR = JSON.stringify(data);
+        let resJSON = JSON.parse(resSTR);
+        console.log(data)
+        console.log(data.body)
+        console.log(data.status)
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.responseString = resJSON.body
+        this.responseStatus = resJSON.status
+
+        console.log(this.responseString)
+
+        this.regFormSubmitted = true;
+        this.regForm.reset();       
+      },
+      error => {
+        console.log(error)
+        let resSTR = JSON.stringify(error);
+        let resJSON = JSON.parse(resSTR);
+        console.log(resJSON.body)
+        console.log(resJSON.status)
+        this.responseString = resJSON.body
+        this.responseStatus = resJSON.status
+      }
+    );
+
   }
 
   //add RTO Officer function from rtoofficer service/admin service...below

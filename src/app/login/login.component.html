@@ -16,12 +16,13 @@
     </ul>
 </div>
 <div class="tab-content" id="pills-tabContent">
-    <div  class="tab-pane fade show active" id="pills-user-sign-in" role="tabpanel"
+    <div class="tab-pane fade show active" id="pills-user-sign-in" role="tabpanel"
         aria-labelledby="pills-user-sign-in-tab">
-        <!--Form Starts-->
+        <!--User Login Form-->
         <div class="container my-4">
             <!-- Default form login -->
-            <form [formGroup]="userLoginForm" class="form-signin border border-light shadow-lg p-4" (ngSubmit)="userLogin(userLoginForm.controls['username'].value , userLoginForm.controls['password'].value , userLoginForm.controls['rememberMe'].value)">
+            <form [formGroup]="userLoginForm" class="form-signin border border-light shadow-lg p-4"
+                (ngSubmit)="userLogin(userLoginForm.controls['username'].value , userLoginForm.controls['password'].value , userLoginForm.controls['rememberMe'].value)">
 
                 <p class="text-center h4 mb-4">User Sign In</p>
 
@@ -138,36 +139,79 @@
     </div>
     <div class="tab-pane fade" id="pills-rto-officer-sign-in" role="tabpanel"
         aria-labelledby="pills-rto-officer-sign-in-tab">
-        <!--Form Starts-->
+        <!--RTO Officer Login Form-->
         <div class="container my-4">
 
 
             <!-- Default form login -->
-            <form class="form-signin border border-light shadow-lg p-4" action="#!">
+            <form [formGroup]="rtoLoginForm" class="form-signin border border-light shadow-lg p-4"
+                (ngSubmit)="rtoOfficerLogin(rtoLoginForm.controls['rtoUsername'].value,rtoLoginForm.controls['rtoPassword'].value,rtoLoginForm.controls['rtoRememberMe'].value)">
 
                 <p class="text-center h4 mb-4">RTO Officer Sign In</p>
 
                 <!-- Username -->
-                <label for="defaultRTOLoginFormUserName">Username</label>
-                <input type="text" id="defaultRTOLoginFormUserName" class="form-control mb-4"
-                    placeholder="Enter username...">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="defaultRTOLoginFormUserName">Username</label>
+                        </div>
+                        <div class="col">
+                            <div *ngIf="rtoLoginForm.controls['rtoUsername'].invalid &&(rtoLoginForm.controls['rtoUsername'].dirty || rtoLoginForm.controls['rtoUsername'].touched)"
+                                class="text-danger text-right">
+                                <small>
+                                    <strong *ngIf="rtoUsername.errors?.required">Username is required.</strong>
+                                </small>
+                            </div>
+                            <div *ngIf="rtoLoginForm.controls['rtoUsername'].valid &&(rtoLoginForm.controls['rtoUsername'].dirty || rtoLoginForm.controls['rtoUsername'].touched)"
+                                class="text-success text-right">
+                                <small>
+                                    <strong><i class="bi bi-check-lg"></i></strong>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <input formControlName="rtoUsername" type="text" id="defaultRTOLoginFormUserName"
+                        class="form-control mb-4" placeholder="Enter username...">
+                </div>
+
 
                 <!-- Password -->
-                <label for="defaultRTOLoginFormPassword">Password</label>
-                <input type="password" id="defaultRTOLoginFormPassword" class="form-control mb-4"
-                    placeholder="Password...">
-
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="defaultRTOLoginFormPassword">Password</label>
+                        </div>
+                        <div class="col">
+                            <div *ngIf="rtoLoginForm.controls['rtoPassword'].invalid &&(rtoLoginForm.controls['rtoPassword'].dirty || rtoLoginForm.controls['rtoPassword'].touched)"
+                                class="text-danger text-right">
+                                <small>
+                                    <strong *ngIf="rtoPassword.errors?.required">Username is required.</strong>
+                                </small>
+                            </div>
+                            <div *ngIf="rtoLoginForm.controls['rtoPassword'].valid &&(rtoLoginForm.controls['rtoPassword'].dirty || rtoLoginForm.controls['rtoPassword'].touched)"
+                                class="text-success text-right">
+                                <small>
+                                    <strong><i class="bi bi-check-lg"></i></strong>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group" id="show_hide_loginRTO_password">
+                        <input formControlName="rtoPassword" type="password" id="defaultRTOLoginFormPassword"
+                            class="form-control mb-4" placeholder="Password...">
+                        <div class="input-group-text">
+                            <a><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-around">
                     <div>
                         <!-- Remember me -->
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultRTOLoginFormRemember">
+                            <input formControlName="rtoRememberMe" type="checkbox" class="custom-control-input"
+                                id="defaultRTOLoginFormRemember">
                             <label class="custom-control-label" for="defaultRTOLoginFormRemember">Remember me</label>
                         </div>
-                    </div>
-                    <div>
-                        <!-- Forgot password -->
-                        <a href="">Forgot password?</a>
                     </div>
                 </div>
 
@@ -190,38 +234,49 @@
                         -->
             </form>
             <!-- Default form login -->
-
+            <div class="form-signin alert alert-dismissible fade show"
+                [ngClass]="rtoResponseStatus  == 500 ?  'alert-danger ' : rtoResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                role="alert" *ngIf="rtoLoginFormSubmitted">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <div *ngIf="rtoResponseStatus  == 500;"><strong>Internal Sever Error</strong></div>
+                <div *ngIf="rtoResponseStatus  != 500;"><strong>{{rtoResponseString}}</strong></div>
+            </div>
 
 
         </div>
         <!--Form ends-->
     </div>
     <div class="tab-pane fade" id="pills-admin-sign-in" role="tabpanel" aria-labelledby="pills-admin-sign-in-tab">
-        <!--Form Starts-->
+        <!--Admin Login Form-->
         <div class="container my-4">
 
 
 
             <!-- Default form login -->
-            <form [formGroup]="adminLoginForm" class="form-signin border border-light shadow-lg p-4" (ngSubmit)="adminLogin(adminLoginForm.controls['adminUsername'].value , adminLoginForm.controls['adminPassword'].value , adminLoginForm.controls['adminRememberMe'].value)">
+            <form [formGroup]="adminLoginForm" class="form-signin border border-light shadow-lg p-4"
+                (ngSubmit)="adminLogin(adminLoginForm.controls['adminUsername'].value , adminLoginForm.controls['adminPassword'].value , adminLoginForm.controls['adminRememberMe'].value)">
 
                 <p class="text-center h4 mb-4">Admin Sign In</p>
 
                 <!-- Username -->
                 <label for="defaultAdminLoginFormUserName">Username</label>
-                <input formControlName="adminUsername" type="text" id="defaultAdminLoginFormUserName" class="form-control mb-4"
-                    placeholder="Enter username...">
+                <input formControlName="adminUsername" type="text" id="defaultAdminLoginFormUserName"
+                    class="form-control mb-4" placeholder="Enter username...">
 
                 <!-- Password -->
                 <label for="defaultAdminLoginFormPassword">Password</label>
-                <input formControlName="adminPassword" type="password" id="defaultAdminLoginFormPassword" class="form-control mb-4"
-                    placeholder="Password...">
+                <input formControlName="adminPassword" type="password" id="defaultAdminLoginFormPassword"
+                    class="form-control mb-4" placeholder="Password...">
 
                 <div class="d-flex justify-content-around">
                     <div>
                         <!-- Remember me -->
                         <div class="custom-control custom-checkbox">
-                            <input formControlName="adminRememberMe" type="checkbox" class="custom-control-input" id="defaultAdminLoginFormRemember">
+                            <input formControlName="adminRememberMe" type="checkbox" class="custom-control-input"
+                                id="defaultAdminLoginFormRemember">
                             <label class="custom-control-label" for="defaultAdminLoginFormRemember">Remember me</label>
                         </div>
                     </div>
