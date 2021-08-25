@@ -252,13 +252,84 @@
                 </h4>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
+                        <ng-container *ngIf="isAddressPresent; then thenTemplate2; else elseTemplate3"></ng-container>
+                        <ng-template #thenTemplate2>
+                            <!--Present Address View-->
+                            <p class="display-5">Present Address</p>
+                            <div class="datatable table-responsive">
+
+                                <table class="table table-bordered table-hover" id="dataTable2" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>House</th>
+                                            <th>Landmark</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Pincode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{this.applicantPresentAddress.house}}</td>
+                                            <td>{{this.applicantPresentAddress.landmark}}</td>
+                                            <td>{{this.applicantPresentAddress.city}}</td>
+                                            <td>{{this.applicantPresentAddress.state}}</td>
+                                            <td>{{this.applicantPresentAddress.pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--Permanent Address View-->
+                            <p class="display-5">Permanent Address</p>
+                            <div class="datatable table-responsive">
+
+                                <table class="table table-bordered table-hover" id="dataTable3" width="100%"
+                                    cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>House</th>
+                                            <th>Landmark</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Pincode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{this.applicantPermanentAddress.house}}</td>
+                                            <td>{{this.applicantPermanentAddress.landmark}}</td>
+                                            <td>{{this.applicantPermanentAddress.city}}</td>
+                                            <td>{{this.applicantPermanentAddress.state}}</td>
+                                            <td>{{this.applicantPermanentAddress.pincode}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-dark" routerLink="/user-address">Edit <i class="bi bi-pencil-square"></i></button>
+                        </ng-template>
+                        <ng-template #elseTemplate3>
+                            <ng-container *ngIf="!isApplicantPresent; else elseTemplate4">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">Profile not added</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-template #elseTemplate4>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">Address not added</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-address">Add Address</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ng-template>
                     </div>
                 </div>
             </div>
