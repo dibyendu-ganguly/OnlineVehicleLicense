@@ -17,6 +17,8 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { AdminComponent } from './admin/admin.component';
 import { FaqComponent } from './faq/faq.component';
+import { RtoOfficerComponent } from './rto-officer/rto-officer.component';
+import { ViewApplicationComponent } from './view-application/view-application.component';
 
 const routes : Routes = [
   {
@@ -70,6 +72,14 @@ const routes : Routes = [
   {
     path : 'admin',
     component : AdminComponent
+  },
+  {
+    path : 'rto-officer',
+    component : RtoOfficerComponent
+  },
+  {
+    path : 'view-applications',
+    component : ViewApplicationComponent
   },
   {
     path : 'FAQ',

@@ -1,1 +1,77 @@
-<p>rto-officer works!</p>
+<!-- Page Content -->
+<div id="page-content-wrapper">
+
+    <app-rto-officer-dashboard-navbar></app-rto-officer-dashboard-navbar>
+
+    <div class="container-fluid">
+        <h1 class="my-4">Dashboard</h1>
+
+    </div>
+
+    <div class="container-fluid  mb-4">
+        <div class="accordion" id="accordionExample">
+            <!--Application info-->
+            <div class="card">
+                <h4 class="card-header bg-olive-dark text-white" id="headingThree">
+                    <div class="row">
+                        <div class="col">Application</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p class="display-5">No Applications yet</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Appointment info-->
+            <div class="card">
+                <h4 class="card-header bg-olive-light text-white" id="headingFour">
+                    <div class="row">
+                        <div class="col">Appointment</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p class="display-5">No Appointments yet</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--License info-->
+            <div class="card">
+                <h4 class="card-header bg-olive-dark text-white" id="headingFive">
+                    <div class="row">
+                        <div class="col">License</div>
+                        <div class="col text-right">
+                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </h4>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p class="display-5">No Licenses Issued yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /#page-content-wrapper -->
