@@ -1,1 +1,157 @@
-<p>appointment works!</p>
+<div id="page-content-wrapper">
+    <app-user-dashboard-navbar></app-user-dashboard-navbar>
+    <div class="container-fluid">
+        <h1 class="mt-4">Appointment</h1>
+        <ul>
+            <li>All the fields are required.</li>
+        </ul>
+        <p>Submit button will be enabled once all the required fields are corectly entered</p>
+    </div>
+
+    <div class="container-fluid mb-4">
+        <div class="card">
+            <h4 class="card-header">Appointment</h4>
+            <div class="card-body">
+                <form [formGroup]="appointmentForm">
+
+
+
+                    <div class="form-row">
+                        <!--RTO Office-->
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="defaultRegisterFormRTO">RTO Office</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="appointmentForm.controls['rtoOfficeVal'].invalid &&(appointmentForm.controls['rtoOfficeVal'].dirty || appointmentForm.controls['rtoOfficeVal'].touched)"
+                                        class="text-danger text-right">
+                                        <small class="">
+                                            <strong *ngIf="rtoOfficeVal.errors?.required">RTO office is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="appointmentForm.controls['rtoOfficeVal'].valid &&(appointmentForm.controls['rtoOfficeVal'].dirty || appointmentForm.controls['rtoOfficeVal'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <select formControlName="rtoOfficeVal" class="form-control custom-select mr-sm-2"
+                                id="defaultRegisterFormRTO">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let rto of rtoOfficeMap | keyvalue" value="{{rto.key}}">
+                                    {{ rto.value }}
+                                </option>
+                            </select>
+                    
+                        </div>
+
+                        <div class="form-group col-md">
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputapplicationType">License Type</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="appointmentForm.controls['applicationType'].invalid && (appointmentForm.controls['applicationType'].dirty || appointmentForm.controls['applicationType'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="applicationType.errors?.required">License type is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="appointmentForm.controls['applicationType'].valid && (appointmentForm.controls['applicationType'].dirty || appointmentForm.controls['applicationType'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <select formControlName="applicationType" class="form-control custom-select mr-sm-2"
+                                id="inputapplicationType">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let enum of applicationTypeList | keyvalue" value="{{enum.value}}">
+                                    {{ enum.value}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <!--Test Date-->
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputTestDate">Select Test Date</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="appointmentForm.controls['testDate'].invalid &&(appointmentForm.controls['testDate'].dirty || appointmentForm.controls['testDate'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="testDate.errors?.required">Test Date is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="appointmentForm.controls['testDate'].valid &&(appointmentForm.controls['testDate'].dirty || appointmentForm.controls['testDate'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <input formControlName="testDate" type="date" class="form-control"
+                                id="inputTestDate">
+                        </div>
+                    
+
+
+                    
+                        <!--Test Time-->
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputTimeSlot">Select Test Time</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="appointmentForm.controls['timeSlot'].invalid &&(appointmentForm.controls['timeSlot'].dirty || appointmentForm.controls['timeSlot'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="timeSlot.errors?.required">Time Slot is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="appointmentForm.controls['timeSlot'].valid &&(appointmentForm.controls['timeSlot'].dirty || appointmentForm.controls['timeSlot'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <input formControlName="timeSlot" type="time" class="form-control"
+                                id="inputTimeSlot">
+                        </div>
+                    </div>  
+                    
+                      
+                    <div class="row">
+                        <div class="col-3">
+                            <button type="submit" [disabled]="appointmentForm.invalid"  class="btn bg-olive text-white mb-2 mr-2" (click)="addAppointment()">Submit</button>
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
