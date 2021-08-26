@@ -23,6 +23,7 @@ import { PermitComponent } from './permit/permit.component';
 import { HyperlinkPolicyComponent } from './hyperlink-policy/hyperlink-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { LicenseComponent } from './license/license.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes : Routes = [
   {
@@ -68,6 +69,10 @@ const routes : Routes = [
   {
     path : 'login',
     component : LoginComponent
+  },
+  {
+    path : 'change-password',
+    component : ChangePasswordComponent
   },
   {
     path : 'contact',

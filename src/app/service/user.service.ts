@@ -96,4 +96,12 @@ export class UserService {
     return this.http.get<any>(`${this.baseUrl}`+`/viewApplication/${applicationNumber}`+'DL');
   }
 
+  getLLAppointment(applicationNumber:string):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}`+`/appointment/application/${applicationNumber}`+'LL/appointment-details');
+  }
+
+  getDLAppointment(applicationNumber:string):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}`+`/appointment/application/${applicationNumber}`+'DL/appointment-details');
+  }
+
  }

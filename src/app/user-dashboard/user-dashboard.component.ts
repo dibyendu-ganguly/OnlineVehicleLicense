@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Address } from '../models/address.model';
 import { Applicant } from '../models/applicant.model';
 import { Application } from '../models/application.model';
+import { Appointment } from '../models/appointment.model';
 import { TemporaryAddress } from '../models/temporary-address.model';
 import { UserService } from '../service/user.service';
 
@@ -25,11 +26,15 @@ export class UserDashboardComponent implements OnInit {
   applicantPermanentAddress: Address = new Address();
   applicantLLApplication : Application = new Application();
   applicantDLApplication : Application = new Application();
+  applicantLLAppointment : Appointment = new Appointment();
+  applicantDlAppointment : Appointment = new Appointment();
 
   isApplicantPresent = false;
   isAddressPresent = false;
   isLLPresent = false;
   isDLPresent = false;
+  isLLAppointmentPresent = false;
+  isDLAppointmentPresent = false;
 
   isLoggedIn: boolean = false;
   userName?: string;
@@ -142,6 +147,44 @@ export class UserDashboardComponent implements OnInit {
         console.log(error);
       }
     );
+
+    this.userService.getLLAppointment(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantLLAppointment = data;
+        console.log(this.applicantLLAppointment);
+        if(this.applicantLLAppointment!=null){
+          this.isLLAppointmentPresent = true;
+        }
+        else {
+          this.isLLAppointmentPresent = false;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+
+    );
+
+    
+    this.userService.getDLAppointment(this.userName!).subscribe(
+      data => {
+        console.log(data);
+        this.applicantDlAppointment = data;
+        console.log(this.applicantDlAppointment);
+        if(this.applicantDlAppointment!=null){
+          this.isDLAppointmentPresent = true;
+        }
+        else {
+          this.isDLAppointmentPresent = false;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
+
 
 
     
