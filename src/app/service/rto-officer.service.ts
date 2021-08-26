@@ -5,6 +5,7 @@ import { Application } from '../models/application.model';
 import { Appointment } from '../models/appointment.model';
 import { RtoOffice } from '../models/rto-office.model';
 import { RtoOfficer } from '../models/rto-officer.model';
+import { TestResult } from '../models/test-result.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -40,4 +41,9 @@ export class RtoOfficerService {
     return this.http.get<Set<Appointment>>(`${this.baseUrl}`+`/view-all-appointment/`+`${rtoId}`);
   }
 
+  modifyTestResult(appointmentNumber:string, testResult: TestResult):Observable<HttpResponse<String>>{
+    let params = new HttpParams()
+    .set('appointmentNumber', appointmentNumber);
+    return this.http.put(`${this.baseUrl}`+`/modify-test-results/${testResult}`,params,{responseType: 'text', observe: 'response'});
+  }
 }

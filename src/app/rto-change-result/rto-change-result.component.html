@@ -1,0 +1,113 @@
+<div id="page-content-wrapper">
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Profile</h1>
+        <ul>
+            <li>All the fields except middle name is required.</li>
+            <li>Mobile number should consists of 10 digits only. Do not put the country code here</li>
+            <li>Vehicle number consists of 12 characters including <mark>-</mark>, alphabets and digits</li>
+        </ul>
+        <p>Submit button will be enabled once all the required fields are correctly entered</p>
+    </div>
+
+    <div class="container-fluid mb-4">
+        <div class="card">
+            <h4 class="card-header">Profile</h4>
+            <div class="card-body">
+                <form [formGroup]="changeForm" (ngSubmit)="changeResult(changeForm.controls['appointmentNumber'].value,changeForm.controls['testResult'].value)">
+                    <div class="form-row">
+
+                        <!--App number-->
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputnationality4">Appointment Number</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="changeForm.controls['appointmentNumber'].invalid &&(changeForm.controls['appointmentNumber'].dirty || changeForm.controls['appointmentNumber'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="appointmentNumber.errors?.required">Appointment Number is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="changeForm.controls['appointmentNumber'].valid &&(changeForm.controls['appointmentNumber'].dirty || changeForm.controls['appointmentNumber'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <select formControlName="appointmentNumber" class="form-control custom-select mr-sm-2"
+                                id="inputNationality4">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let app of appointment" value="{{app.appointmentNumber}}">
+                                    {{ app.appointmentNumber }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <!--Test Result-->
+                        <div class="form-group col-md">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputnationality4">Test result</label>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="changeForm.controls['testResult'].invalid &&(changeForm.controls['testResult'].dirty || changeForm.controls['testResult'].touched)"
+                                        class="text-danger text-right">
+                                        <small>
+                                            <strong *ngIf="testResult.errors?.required">Test Result is
+                                                required.</strong>
+                                        </small>
+                                    </div>
+                                    <div *ngIf="changeForm.controls['appointmentNumber'].valid &&(changeForm.controls['testResult'].dirty || changeForm.controls['testResult'].touched)"
+                                        class="text-success text-right">
+                                        <small>
+                                            <strong><i class="bi bi-check-lg"></i></strong>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <select formControlName="testResult" class="form-control custom-select mr-sm-2"
+                                id="inputNationality4">
+                                <option selected disabled>Choose...</option>
+                                <option *ngFor="let enum of testResultList | keyvalue" value="{{enum.value}}">
+                                    {{ enum.value }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--buttons-->
+                        <div class="col-3">
+                            <button type="submit" class="btn bg-olive text-white mb-2 mr-2"
+                                [disabled]="changeForm.invalid">Save</button>
+                            <button type="reset" class="btn bg-olive text-white mb-2 mr-2">Reset</button>
+                            <button class="btn btn-dark" routerLink="/rto-officer">Back to dashboard</button>
+                        </div>
+
+                        <!--Messages-->
+                        <div class="col">
+                            <!-- <div class="form-signin alert alert-dismissible fade show"
+                                [ngClass]="applicantResponseStatus  == 500 ?  'alert-danger ' : applicantResponseStatus  == 200 ?  'alert-success ' : 'alert-info'"
+                                role="alert" *ngIf="applicantFormSubmitted">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                                    (click)="applicantFormSubmitted=false;">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <div *ngIf="applicantResponseStatus  == 500;"><strong>Internal Sever Error</strong>
+                                </div>
+                                <div *ngIf="applicantResponseStatus  != 500;">
+                                    <strong>{{applicantFormResponseString}}</strong></div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
