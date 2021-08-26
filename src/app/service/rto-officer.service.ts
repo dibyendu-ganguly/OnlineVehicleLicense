@@ -37,7 +37,7 @@ export class RtoOfficerService {
   }
 
   viewAppointments(rtoId : number):Observable<Set<Appointment>> {
-    return this.http.get<Set<Appointment>>(`${this.baseUrl}`+`/view-all-appointments/`+`${rtoId}`);
+    return this.http.get<Set<Appointment>>(`${this.baseUrl}`+`/view-all-appointment/`+`${rtoId}`);
   }
 
 }
