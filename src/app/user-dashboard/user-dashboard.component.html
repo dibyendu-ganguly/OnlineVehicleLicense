@@ -252,68 +252,30 @@
                 </h4>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        <ng-container *ngIf="isLLPresent; then thenTemplateLL; else elseTemplateLL"></ng-container>
-                        <ng-template #thenTemplateLL>
-                            <!--Present Address View-->
-                            <p class="display-5">Learner's License</p>
-                            <div class="datatable table-responsive">
-
-                                <table class="table table-bordered table-hover" id="dataTable2" width="100%"
-                                    cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Application Type</th>
-                                            <th>Application Date</th>
-                                            <th>Mode of Payment</th>
-                                            <th>Amount Paid</th>
-                                            <th>Remarks</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{this.applicantLLApplication.applicationType}}</td>
-                                            <td>{{this.applicantLLApplication.applicationDate}}</td>
-                                            <td>{{this.applicantLLApplication.modeOfPayment}}</td>
-                                            <td>{{this.applicantLLApplication.amountPaid}}</td>
-                                            <td>{{this.applicantLLApplication.remarks}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <!--Create Profile-->
+                        <ng-container *ngIf="!isApplicantPresent; then thenTemplatefor; else elseTemplatefor">
+                            <!--If applicant not present-->
+                        </ng-container>
+                        <ng-template #thenTemplatefor>
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="display-5">Profile not added</h5>
+                                </div>
+                                <div class="col text-right">
+                                    <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
+                                </div>
                             </div>
-                            <button class="btn btn-dark" routerLink="/user-application">Edit <i
-                                    class="bi bi-pencil-square"></i></button>
                         </ng-template>
-                        <ng-template #elseTemplateLL>
-                            <ng-container *ngIf="!isApplicantPresent; else elseTemplateLL1">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="display-5">Profile not added</h5>
-                                    </div>
-                                    <div class="col text-right">
-                                        <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
-                                    </div>
-                                </div>
-                            </ng-container>
-                            <ng-template #elseTemplateLL1>
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="display-5">No Lerner's License application present</h5>
-                                    </div>
-                                    <div class="col text-right">
-                                        <button class="btn btn-info" routerLink="/user-address">Add Application</button>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </ng-template>
-
-                        <div class="card-body">
-                            <ng-container *ngIf="isDLPresent; then thenTemplateDL; else elseTemplateDL"></ng-container>
-                            <ng-template #thenTemplateDL>
+                        <!--If applicant present-->
+                        <ng-template #elseTemplatefor>
+                            <!--LL -->
+                            <ng-container *ngIf="isLLPresent; then thenTemplateLL; else elseTemplateLL"></ng-container>
+                            <!--If LL present-->
+                            <ng-template #thenTemplateLL>
                                 <!--Present Address View-->
-                                <p class="display-5">Drivers's License</p>
+                                <p class="display-5">Learner's License</p>
                                 <div class="datatable table-responsive">
-    
+
                                     <table class="table table-bordered table-hover" id="dataTable2" width="100%"
                                         cellspacing="0">
                                         <thead>
@@ -323,7 +285,53 @@
                                                 <th>Mode of Payment</th>
                                                 <th>Amount Paid</th>
                                                 <th>Remarks</th>
-    
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{this.applicantLLApplication.applicationType}}</td>
+                                                <td>{{this.applicantLLApplication.applicationDate}}</td>
+                                                <td>{{this.applicantLLApplication.modeOfPayment}}</td>
+                                                <td>{{this.applicantLLApplication.amountPaid}}</td>
+                                                <td>{{this.applicantLLApplication.remarks}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-dark" routerLink="/user-application">Edit <i
+                                        class="bi bi-pencil-square"></i></button>
+                            </ng-template>
+                            <!--If LL not present-->
+                            <ng-template #elseTemplateLL>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">No Lerner's License application present</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-application">Add Application</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <!--DL-->
+                            <ng-container *ngIf="isDLPresent; then thenTemplateDL; else elseTemplateDL"></ng-container>
+                            <!--If Dl is present-->
+                            <ng-template #thenTemplateDL>
+                                <!--Present Address View-->
+                                <p class="display-5">Drivers's License</p>
+                                <div class="datatable table-responsive">
+
+                                    <table class="table table-bordered table-hover" id="dataTable2" width="100%"
+                                        cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Application Type</th>
+                                                <th>Application Date</th>
+                                                <th>Mode of Payment</th>
+                                                <th>Amount Paid</th>
+                                                <th>Remarks</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -340,89 +348,324 @@
                                 <button class="btn btn-dark" routerLink="/user-application">Edit <i
                                         class="bi bi-pencil-square"></i></button>
                             </ng-template>
+                            <!--If Dl not present-->
                             <ng-template #elseTemplateDL>
-                                <ng-container *ngIf="!isApplicantPresent; else elseTemplateDL1">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">No Drivers's License application present</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-application">Add
+                                            Application</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                        </ng-template>
+                    </div>
+                </div>
+
+
+                <!--Appointment info-->
+                <div class="card">
+                    <h4 class="card-header bg-olive-light text-white" id="headingFour">
+                        <div class="row">
+                            <div class="col">Appointment</div>
+                            <div class="col text-right">
+                                <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </h4>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <!--Create Profile-->
+                            <ng-container *ngIf="!isApplicantPresent; then thenTemplateforAppnt; else elseTemplateforAppnt">
+                                <!--If applicant not present-->
+                            </ng-container>
+                            <ng-template #thenTemplateforAppnt>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">Profile not added</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <!--If applicant present-->
+                            <ng-template #elseTemplateforAppnt>
+                                <div class="my-2">
+                                    <!--LL-->
+                                    <ng-container *ngIf="isLLPresent; then thenTemplateLL; else elseTemplateLL">
+                                    </ng-container>
+                                    <!--If LL present-->
+                                    <ng-template #thenTemplateLL>
+                                        <!--Present Address View-->
+                                        <p class="display-5">Learner's License</p>
+                                        <ng-container *ngIf="isLLAppointmentPresent; then thenTemplateLLApp; else elseTemplateLLApp"></ng-container>
+                                        <ng-template #thenTemplateLLApp>
+                                            <table class="table table-bordered table-hover" id="dataTableApp" width="100%"
+                                                        cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Appointment Number</th>
+                                                                <th>Test Date</th>
+                                                                <th>Time Slot</th>
+                                                                <th>Test Result</th>
+        
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{{this.applicantLLAppointment.appointmentNumber}}</td>
+                                                                <td>{{this.applicantLLAppointment.testDate}}</td>
+                                                                <td>{{this.applicantLLAppointment.timeSlot}}</td>
+                                                                <td>{{this.applicantLLAppointment.testResult}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                        </ng-template>
+                                        <ng-template #elseTemplateLLApp>
+                                            <div class="row my-2">
+                                                <div class="col">
+                                                    <h5 class="display-5">No Lerner's License appointment present</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <button class="btn btn-info" routerLink="/user-appointment">Add
+                                                        Appointment</button>
+                                                </div>
+                                            </div>
+
+                                        </ng-template>
+                                        
+                                    </ng-template>
+                                    <!--If LL not present-->
+                                    <ng-template #elseTemplateLL>
+                                        <div class="row my-2">
+                                            <div class="col">
+                                                <h5 class="display-5">No Lerner's License application present</h5>
+                                            </div>
+                                            <div class="col text-right">
+                                                <button class="btn btn-info" routerLink="/user-address">Add
+                                                    Application</button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+
+                                </div>
+
+
+                                <div class="my-2">
+                                    <!--DL-->
+                                    <ng-container *ngIf="isDLPresent; then thenTemplateDL; else elseTemplateDL">
+                                    </ng-container>
+                                    <!--If Dl is present-->
+                                    <ng-template #thenTemplateDL>
+                                        <!--Present Address View-->
+                                        <p class="display-5">Drivers's License</p>
+                                        <div class="datatable table-responsive">
+                                            <ng-container *ngIf="isDLAppointmentPresent; then thenTemplateDLApp; else elseTemplateDLApp"></ng-container>
+                                            <ng-template #thenTemplateDLApp>
+                                                <table class="table table-bordered table-hover" id="dataTableApp" width="100%"
+                                                    cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Appointment Number</th>
+                                                            <th>Test Date</th>
+                                                            <th>Time Slot</th>
+                                                            <th>Test Result</th>
+    
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{this.applicantDlAppointment.appointmentNumber}}</td>
+                                                            <td>{{this.applicantDlAppointment.testDate}}</td>
+                                                            <td>{{this.applicantDlAppointment.timeSlot}}</td>
+                                                            <td>{{this.applicantDlAppointment.testResult}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+    
+                                            </ng-template>
+                                            <ng-template #elseTemplateDLApp>
+                                                <div class="row my-2">
+                                                    <div class="col">
+                                                        <h5 class="display-5">No Driver's License appointment present</h5>
+                                                    </div>
+                                                    <div class="col text-right">
+                                                        <button class="btn btn-info" routerLink="/user-appointment">Add
+                                                            Appointment</button>
+                                                    </div>
+                                                </div>
+    
+                                            </ng-template>
+                                        </div>
+                                        <button class="btn btn-dark" routerLink="/user-application">Edit <i
+                                                class="bi bi-pencil-square"></i></button>
+
+
+                                    </ng-template>
+                                    <!--If Dl not present-->
+                                    <ng-template #elseTemplateDL>
+                                        <div class="row my-2">
+                                            <div class="col">
+                                                <h5 class="display-5">No Drivers's License application present</h5>
+                                            </div>
+                                            <div class="col text-right">
+                                                <button class="btn btn-info" routerLink="/user-application">Add
+                                                    Application</button>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--License info-->
+                <div class="card">
+                    <h4 class="card-header bg-olive-dark text-white" id="headingFive">
+                        <div class="row">
+                            <div class="col">License</div>
+                            <div class="col text-right">
+                                <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </h4>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <!--Create Profile-->
+                            <ng-container *ngIf="!isApplicantPresent; then thenTemplatefor; else elseTemplatefor">
+                                <!--If applicant not present-->
+                            </ng-container>
+                            <ng-template #thenTemplatefor>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="display-5">Profile not added</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <!--If applicant present-->
+                            <ng-template #elseTemplatefor>
+                                <!--LL -->
+                                <ng-container *ngIf="isLLPresent; then thenTemplateLL; else elseTemplateLL">
+                                </ng-container>
+                                <!--If LL present-->
+                                <ng-template #thenTemplateLL>
+                                    <!--Present Address View-->
+                                    <p class="display-5">Learner's License</p>
+                                    <div class="datatable table-responsive">
+
+                                        <table class="table table-bordered table-hover" id="dataTable2" width="100%"
+                                            cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Application Type</th>
+                                                    <th>Application Date</th>
+                                                    <th>Mode of Payment</th>
+                                                    <th>Amount Paid</th>
+                                                    <th>Remarks</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{this.applicantLLApplication.applicationType}}</td>
+                                                    <td>{{this.applicantLLApplication.applicationDate}}</td>
+                                                    <td>{{this.applicantLLApplication.modeOfPayment}}</td>
+                                                    <td>{{this.applicantLLApplication.amountPaid}}</td>
+                                                    <td>{{this.applicantLLApplication.remarks}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button class="btn btn-dark" routerLink="/user-application">Edit <i
+                                            class="bi bi-pencil-square"></i></button>
+                                </ng-template>
+                                <!--If LL not present-->
+                                <ng-template #elseTemplateLL>
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="display-5">Profile not added</h5>
+                                            <h5 class="display-5">No Lerner's License application present</h5>
                                         </div>
                                         <div class="col text-right">
-                                            <button class="btn btn-info" routerLink="/user-profile">Create Profile</button>
+                                            <button class="btn btn-info" routerLink="/user-address">Add
+                                                Application</button>
                                         </div>
                                     </div>
+                                </ng-template>
+
+                                <!--DL-->
+                                <ng-container *ngIf="isDLPresent; then thenTemplateDL; else elseTemplateDL">
                                 </ng-container>
-                                <ng-template #elseTemplateDL1>
+                                <!--If Dl is present-->
+                                <ng-template #thenTemplateDL>
+                                    <!--Present Address View-->
+                                    <p class="display-5">Drivers's License</p>
+                                    <div class="datatable table-responsive">
+
+                                        <table class="table table-bordered table-hover" id="dataTable2" width="100%"
+                                            cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Application Type</th>
+                                                    <th>Application Date</th>
+                                                    <th>Mode of Payment</th>
+                                                    <th>Amount Paid</th>
+                                                    <th>Remarks</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{this.applicantDLApplication.applicationType}}</td>
+                                                    <td>{{this.applicantDLApplication.applicationDate}}</td>
+                                                    <td>{{this.applicantDLApplication.modeOfPayment}}</td>
+                                                    <td>{{this.applicantDLApplication.amountPaid}}</td>
+                                                    <td>{{this.applicantDLApplication.remarks}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button class="btn btn-dark" routerLink="/user-application">Edit <i
+                                            class="bi bi-pencil-square"></i></button>
+                                </ng-template>
+                                <!--If Dl not present-->
+                                <ng-template #elseTemplateDL>
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="display-5">No Drivers's License application present</h5>
                                         </div>
                                         <div class="col text-right">
-                                            <button class="btn btn-info" routerLink="/user-application">Add Application</button>
+                                            <button class="btn btn-info" routerLink="/user-application">Add
+                                                Application</button>
                                         </div>
                                     </div>
                                 </ng-template>
+
                             </ng-template>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--Appointment info-->
-            <div class="card">
-                <h4 class="card-header bg-olive-light text-white" id="headingFour">
-                    <div class="row">
-                        <div class="col">Appointment</div>
-                        <div class="col text-right">
-                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                <i class="bi bi-chevron-down"></i>
-                            </button>
                         </div>
-                    </div>
-                </h4>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-
-
-            <!--License info-->
-            <div class="card">
-                <h4 class="card-header bg-olive-dark text-white" id="headingFive">
-                    <div class="row">
-                        <div class="col">License</div>
-                        <div class="col text-right">
-                            <button class="btn btn-light text-left collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                <i class="bi bi-chevron-down"></i>
-                            </button>
-                        </div>
-                    </div>
-                </h4>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- /#page-content-wrapper -->
+    <!-- /#page-content-wrapper -->
 
-<!-- </div> -->
-<!-- /#wrapper -->
+    <!-- </div> -->
+    <!-- /#wrapper -->
