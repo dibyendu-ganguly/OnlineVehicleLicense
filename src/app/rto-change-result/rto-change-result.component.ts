@@ -4,15 +4,27 @@ import { Router } from '@angular/router';
 import { Application } from '../models/application.model';
 import { Appointment } from '../models/appointment.model';
 import { RtoOffice } from '../models/rto-office.model';
+import { TestResult } from '../models/test-result.enum';
 import { RtoOfficerService } from '../service/rto-officer.service';
 
 @Component({
-  selector: 'app-rto-officer',
-  templateUrl: './rto-officer.component.html',
-  styleUrls: ['./rto-officer.component.css']
+  selector: 'app-rto-change-result',
+  templateUrl: './rto-change-result.component.html',
+  styleUrls: ['./rto-change-result.component.css']
 })
-export class RtoOfficerComponent implements OnInit {
+export class RtoChangeResultComponent implements OnInit {
 
+  changeForm !: FormGroup;
+
+  public testResultList = TestResult;
+
+  appointmentNumber!: FormControl;
+  testResult !: FormControl;
+
+  changeFormSubmitted = false;
+
+  changeFormResponseString?: string;
+  changeFormResponseStatus?: number;
 
 
   constructor(
@@ -35,7 +47,6 @@ export class RtoOfficerComponent implements OnInit {
   appointment : Set<Appointment> = new Set();
   rtoId !: number;
   rtoOffice : RtoOffice = new RtoOffice();
-
 
   ngOnInit(): void {
 
@@ -100,14 +111,31 @@ export class RtoOfficerComponent implements OnInit {
       }
     );
 
+
+
     if (localStorage.getItem('UserName') == null && sessionStorage.getItem('UserName') == null) {
       this.router.navigate(['forbidden']);
     }
 
+    this.testResult = new FormControl(null,[Validators.required]);
+    this.appointmentNumber = new FormControl(null,[Validators.required]);
 
+    this.changeForm = new FormGroup({
+      'testResult' : this.testResult,
+      'appointmentNumber' : this.appointmentNumber
+    });
 
   }
 
-  
+  changeResult(applicationNumber:string,testResult:TestResult){
+    this.rtoOfficerService.modifyTestResult(applicationNumber,testResult).subscribe(
+      data=>{
+        console.log(data);
+      },
+      error =>{
+        console.log(error)
+      }
+    );
+  }
 
 }
